@@ -16,6 +16,21 @@ import ContactPage from "./pages/contact";
 import NotFoundPage from "./pages/not-found";
 
 function App() {
+  // Set initial height for mobile viewports
+  useEffect(() => {
+    const setDocHeight = () => {
+      const doc = document.documentElement;
+      doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
+    
+    // Set height on initial load
+    setDocHeight();
+    
+    // Update height on resize
+    window.addEventListener('resize', setDocHeight);
+    return () => window.removeEventListener('resize', setDocHeight);
+  }, []);
+  
   // Enable smooth scrolling behavior for hash links
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -50,17 +65,19 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-        <Router>
-          <MainLayout>
-            <Switch>
-              <Route path="/" component={HomePage} />
-              <Route path="/about" component={AboutPage} />
-              <Route path="/projects" component={ProjectsPage} />
-              <Route path="/contact" component={ContactPage} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </MainLayout>
-        </Router>
+        <div className="min-h-screen flex flex-col w-full overflow-x-hidden">
+          <Router>
+            <MainLayout>
+              <Switch>
+                <Route path="/" component={HomePage} />
+                <Route path="/about" component={AboutPage} />
+                <Route path="/projects" component={ProjectsPage} />
+                <Route path="/contact" component={ContactPage} />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </MainLayout>
+          </Router>
+        </div>
         <Toaster />
       </ThemeProvider>
     </QueryClientProvider>

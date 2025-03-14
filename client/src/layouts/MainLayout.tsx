@@ -13,12 +13,12 @@ interface MainLayoutProps {
  */
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Navbar />
       
       <AnimatePresence mode="wait">
         <motion.main 
-          className="flex-grow pt-16 md:pt-20"
+          className="flex-grow w-full pt-16 md:pt-20 flex flex-col"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
