@@ -469,8 +469,8 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
-    </Beam> {/* Closed Beam wrapper */}
+    </Beam>
   );
 };
 
-export default AboutPage;
+export default AboutPage;e;
