@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Navbar from "@/components/ui/Navbar";
+import { Dock } from "@/components/ui/Dock";
 import Footer from "@/components/ui/Footer";
 
 interface MainLayoutProps {
@@ -14,8 +14,8 @@ interface MainLayoutProps {
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
-      <Navbar />
-      
+      <Dock />
+
       <AnimatePresence mode="wait">
         <motion.main 
           className="flex-grow w-full pt-16 md:pt-20 flex flex-col"
@@ -27,7 +27,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           {children}
         </motion.main>
       </AnimatePresence>
-      
+
       <Footer />
     </div>
   );
