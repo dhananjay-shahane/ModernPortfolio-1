@@ -1,54 +1,13 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { ChevronRight, Award, GraduationCap, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { Beam } from "@/components/ui/Beam";
+import { ChevronRight, Award, GraduationCap, Briefcase } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const Beam = ({ children }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      {children}
-    </motion.div>
-  );
-};
 
-/**
- * About page component
- * Displays detailed information about the developer, experience, education, and skills
- * Includes interactive timeline and animated sections
- */
 const AboutPage = () => {
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.6, 
-        ease: [0.22, 1, 0.36, 1]
-      }
-    }
-  };
-
-  // Experience and education data
   const experiences = [
     {
       id: 1,
@@ -89,12 +48,12 @@ const AboutPage = () => {
       degree: "Bachelor of Science in Software Engineering",
       institution: "University of California",
       period: "2010 - 2014",
-      description: "Dean&apos;s List for academic excellence. Participated in various hackathons and coding competitions."
+      description: "Dean's List for academic excellence. Participated in various hackathons and coding competitions."
     }
   ];
 
   return (
-    <Beam className="pt-24 pb-16"> {/* Added Beam wrapper */}
+    <Beam className="pt-24 pb-16">
       {/* Hero Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 md:px-6">
@@ -123,11 +82,8 @@ const AboutPage = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="relative w-full max-w-md mx-auto lg:ml-0">
-                {/* Background decoration */}
                 <div className="absolute -top-6 -left-6 w-full h-full bg-primary/10 rounded-2xl -z-10"></div>
                 <div className="absolute -bottom-6 -right-6 w-full h-full bg-purple-500/10 rounded-2xl -z-10"></div>
-
-                {/* Profile image */}
                 <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border shadow-xl">
                   <img 
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
@@ -139,13 +95,13 @@ const AboutPage = () => {
             </motion.div>
 
             <motion.div
-              variants={containerVariants}
+              variants={{hidden: { opacity: 0 }, visible: {opacity: 1, transition: {staggerChildren: 0.2, delayChildren: 0.1}}}}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <motion.div variants={sectionVariants}>
+              <motion.div variants={{hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }}}>
                 <h2 className="text-3xl font-bold mb-4">John Doe</h2>
                 <h3 className="text-xl text-primary mb-6">Full Stack Developer</h3>
                 <p className="text-muted-foreground mb-6">
@@ -161,7 +117,7 @@ const AboutPage = () => {
                 </p>
               </motion.div>
 
-              <motion.div variants={sectionVariants} className="flex flex-wrap gap-2">
+              <motion.div variants={{hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} className="flex flex-wrap gap-2">
                 <Badge variant="secondary" className="text-sm">JavaScript</Badge>
                 <Badge variant="secondary" className="text-sm">TypeScript</Badge>
                 <Badge variant="secondary" className="text-sm">React</Badge>
@@ -172,7 +128,7 @@ const AboutPage = () => {
                 <Badge variant="secondary" className="text-sm">GraphQL</Badge>
               </motion.div>
 
-              <motion.div variants={sectionVariants} className="pt-4">
+              <motion.div variants={{hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} className="pt-4">
                 <Button asChild>
                   <Link href="/contact">
                     Get In Touch
@@ -211,18 +167,14 @@ const AboutPage = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {/* Timeline line */}
                 {index < experiences.length - 1 && (
                   <div className="absolute left-6 top-14 w-0.5 h-[calc(100%-2rem)] bg-border"></div>
                 )}
-
-                {/* Timeline dot */}
                 <div className="relative z-10 mt-1.5">
                   <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center flex-shrink-0">
                     <Briefcase className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-
                 <div className="flex-1">
                   <div className="mb-1 flex items-center justify-between flex-wrap gap-2">
                     <h3 className="text-xl font-bold">{experience.title}</h3>
@@ -274,18 +226,14 @@ const AboutPage = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {/* Timeline line */}
                 {index < education.length - 1 && (
                   <div className="absolute left-6 top-14 w-0.5 h-[calc(100%-2rem)] bg-border"></div>
                 )}
-
-                {/* Timeline dot */}
                 <div className="relative z-10 mt-1.5">
                   <div className="w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/40 flex items-center justify-center flex-shrink-0">
                     <GraduationCap className="w-5 h-5 text-purple-500" />
                   </div>
                 </div>
-
                 <div className="flex-1">
                   <div className="mb-1 flex items-center justify-between flex-wrap gap-2">
                     <h3 className="text-xl font-bold">{item.degree}</h3>
@@ -473,4 +421,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;e;
+export default AboutPage;
