@@ -1,13 +1,15 @@
 
 import * as React from "react";
-import { Link } from "wouter";
-import { Home, User, FolderKanban, Mail, Moon, Sun } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Home, User, FolderKanban, Mail, Moon, Sun, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function Dock() {
   const { theme, setTheme } = useTheme();
+  const [, setLocation] = useLocation();
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -16,42 +18,60 @@ export function Dock() {
     });
   };
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLocation("/");
+    scrollToTop();
+  };
+
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-2 bg-background/80 backdrop-blur-lg rounded-full p-2 shadow-lg border">
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="rounded-full w-12 h-12 hover:bg-accent"
-          onClick={scrollToTop}
-        >
-          <Home className="h-6 w-6" />
-        </Button>
-        <Link href="/about">
-          <Button variant="ghost" size="icon" className="rounded-full w-12 h-12 hover:bg-accent">
-            <User className="h-6 w-6" />
+    <>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="fixed bottom-4 right-4 rounded-full">
+            <Menu className="h-6 w-6" />
           </Button>
-        </Link>
-        <Link href="/projects">
-          <Button variant="ghost" size="icon" className="rounded-full w-12 h-12 hover:bg-accent">
-            <FolderKanban className="h-6 w-6" />
-          </Button>
-        </Link>
-        <Link href="/contact">
-          <Button variant="ghost" size="icon" className="rounded-full w-12 h-12 hover:bg-accent">
-            <Mail className="h-6 w-6" />
-          </Button>
-        </Link>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full w-12 h-12 hover:bg-accent"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          <Sun className="h-6 w-6 dark:hidden" />
-          <Moon className="h-6 w-6 hidden dark:block" />
-        </Button>
-      </div>
-    </div>
+        </SheetTrigger>
+        <SheetContent side="right" className="w-[280px] sm:w-[320px]">
+          <div className="flex flex-col gap-4 pt-10">
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start gap-2" 
+              onClick={handleHomeClick}
+            >
+              <Home className="h-5 w-5" />
+              Home
+            </Button>
+            <Link href="/about">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <User className="h-5 w-5" />
+                About
+              </Button>
+            </Link>
+            <Link href="/projects">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <FolderKanban className="h-5 w-5" />
+                Projects
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <Mail className="h-5 w-5" />
+                Contact
+              </Button>
+            </Link>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-2"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <Sun className="h-5 w-5 dark:hidden" />
+              <Moon className="h-5 w-5 hidden dark:block" />
+              Theme
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
