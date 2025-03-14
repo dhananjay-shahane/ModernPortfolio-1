@@ -178,15 +178,20 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       >
         <div
           className={cn(
-            "duration-300 fixed inset-y-0 z-50 flex h-full w-72 flex-col overflow-y-auto bg-background p-4 transition-all",
+            "duration-300 fixed inset-y-0 z-50 flex h-full flex-col overflow-y-auto bg-background transition-all",
+            "w-[280px] shadow-lg",
             side === "left" ? "left-0" : "right-0",
             state === "collapsed" && collapsible === "offcanvas" && (side === "left" ? "-translate-x-full" : "translate-x-full"),
-            variant === "floating" && "m-4 h-[calc(100vh-2rem)] rounded-xl border shadow-lg",
+            variant === "floating" && "m-4 h-[calc(100vh-2rem)] rounded-xl border",
             variant === "inset" && "m-4 h-[calc(100vh-2rem)]",
             className
           )}
           {...props}
-        />
+        >
+          <div className="flex-1 overflow-y-auto p-4">
+            {props.children}
+          </div>
+        </div>
         {/* Backdrop for mobile */}
         {state !== "collapsed" && (
           <div 
