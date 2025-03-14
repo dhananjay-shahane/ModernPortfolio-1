@@ -1,9 +1,14 @@
+
 import * as React from "react";
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Home, FolderKanban, Mail, Settings, Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function Navbar() {
   return (
@@ -35,7 +40,7 @@ export function Navbar() {
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent side="right">
             <div className="grid gap-4 py-4">
               <Link href="/" className="block px-4 py-2 hover:bg-accent rounded-lg">
                 Home
