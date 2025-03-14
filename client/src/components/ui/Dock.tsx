@@ -25,23 +25,23 @@ export function Dock() {
   };
 
   const NavItems = () => (
-    <>
+    <div className="flex flex-row md:flex-row items-center gap-2">
       <Button variant="ghost" size="icon" onClick={handleHomeClick}>
-        <Home className="h-[1.2rem] w-[1.2rem]" />
+        <Home className="h-5 w-5" />
       </Button>
       <Link href="/profile">
         <Button variant="ghost" size="icon">
-          <User className="h-[1.2rem] w-[1.2rem]" />
+          <User className="h-5 w-5" />
         </Button>
       </Link>
       <Link href="/projects">
         <Button variant="ghost" size="icon">
-          <FolderKanban className="h-[1.2rem] w-[1.2rem]" />
+          <FolderKanban className="h-5 w-5" />
         </Button>
       </Link>
       <Link href="/contact">
         <Button variant="ghost" size="icon">
-          <Mail className="h-[1.2rem] w-[1.2rem]" />
+          <Mail className="h-5 w-5" />
         </Button>
       </Link>
       <Button
@@ -50,35 +50,32 @@ export function Dock() {
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       >
         {theme === "light" ? (
-          <Moon className="h-[1.2rem] w-[1.2rem]" />
+          <Moon className="h-5 w-5" />
         ) : (
-          <Sun className="h-[1.2rem] w-[1.2rem]" />
+          <Sun className="h-5 w-5" />
         )}
       </Button>
-    </>
+    </div>
   );
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-[1.2rem] w-[1.2rem]" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[200px] sm:w-[240px]">
-              <nav className="flex flex-col gap-4 mt-4">
-                <NavItems />
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-        <nav className="hidden md:flex items-center space-x-2">
-          <NavItems />
-        </nav>
-      </div>
-    </header>
+    <>
+      <nav className="hidden md:flex fixed bottom-4 left-1/2 -translate-x-1/2 p-2 rounded-full border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <NavItems />
+      </nav>
+
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="md:hidden fixed bottom-4 right-4 rounded-full">
+            <Menu className="h-5 w-5" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="bottom" className="h-[200px]">
+          <div className="flex justify-center mt-4">
+            <NavItems />
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
