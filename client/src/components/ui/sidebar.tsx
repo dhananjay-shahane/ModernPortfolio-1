@@ -178,10 +178,10 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       >
         <div
           className={cn(
-            "duration-300 fixed inset-y-0 z-50 flex h-full w-[var(--sidebar-width)] flex-col transition-all",
+            "duration-300 fixed inset-y-0 z-50 flex h-full w-72 flex-col overflow-y-auto bg-background p-4 transition-all",
             side === "left" ? "left-0" : "right-0",
             state === "collapsed" && collapsible === "offcanvas" && (side === "left" ? "-translate-x-full" : "translate-x-full"),
-            variant === "floating" && "m-4 h-[calc(100vh-2rem)] rounded-xl border",
+            variant === "floating" && "m-4 h-[calc(100vh-2rem)] rounded-xl border shadow-lg",
             variant === "inset" && "m-4 h-[calc(100vh-2rem)]",
             className
           )}
