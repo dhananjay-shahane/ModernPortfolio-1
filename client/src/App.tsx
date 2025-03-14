@@ -2,16 +2,21 @@ import { useEffect } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { queryClient } from "./lib/queryClient";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import AboutSection from "./components/AboutSection";
-import ProjectsSection from "./components/ProjectsSection";
-import SkillsSection from "./components/SkillsSection";
-import ContactSection from "./components/ContactSection";
-import Footer from "./components/Footer";
+import { Router, Route, Switch } from "wouter";
+import { ThemeProvider } from "@/components/theme-provider";
+
+// Layouts
+import MainLayout from "./layouts/MainLayout";
+
+// Pages
+import HomePage from "./pages/home";
+import AboutPage from "./pages/about";
+import ProjectsPage from "./pages/projects";
+import ContactPage from "./pages/contact";
+import NotFoundPage from "./pages/not-found";
 
 function App() {
-  // Enable smooth scrolling behavior
+  // Enable smooth scrolling behavior for hash links
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -44,18 +49,20 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="bg-dark text-slate-100 min-h-screen">
-        <Navbar />
-        <main>
-          <HeroSection />
-          <AboutSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <ContactSection />
-        </main>
-        <Footer />
+      <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+        <Router>
+          <MainLayout>
+            <Switch>
+              <Route path="/" component={HomePage} />
+              <Route path="/about" component={AboutPage} />
+              <Route path="/projects" component={ProjectsPage} />
+              <Route path="/contact" component={ContactPage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </MainLayout>
+        </Router>
         <Toaster />
-      </div>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

@@ -1,0 +1,453 @@
+import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { ChevronRight, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { frontendSkills, backendSkills, projects } from "@/lib/data";
+
+/**
+ * Home page component
+ * Features hero section, selected projects, skills, testimonials, and call to action
+ * Includes animations and interactive elements
+ */
+const HomePage = () => {
+  // Animation variants for staggered animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  };
+
+  // Testimonials data
+  const testimonials = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      role: "CEO, TechStart",
+      avatar: "https://randomuser.me/api/portraits/women/67.jpg",
+      content: "John is an exceptional developer who delivered our project ahead of schedule. His attention to detail and problem-solving skills are outstanding.",
+      rating: 5
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      role: "Product Manager, InnovateCorp",
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      content: "Working with John was a pleasure. He understood our requirements perfectly and suggested improvements that made our product even better.",
+      rating: 5
+    },
+    {
+      id: 3,
+      name: "Emily Rodriguez",
+      role: "Founder, DesignHub",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+      content: "John&apos;s ability to translate our design vision into functional code was impressive. He&apos;s both technically skilled and creatively minded.",
+      rating: 4
+    }
+  ];
+
+  return (
+    <div>
+      {/* Hero Section - with animated gradient background and particles */}
+      <section className="relative min-h-[90vh] flex items-center py-16 overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient-slow"></div>
+        
+        {/* Animated particles (decorative elements) */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-primary/10"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 50 + 10}px`,
+                height: `${Math.random() * 50 + 10}px`,
+                animationDuration: `${Math.random() * 20 + 10}s`,
+                animationDelay: `${Math.random() * 2}s`
+              }}
+            ></div>
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <motion.div 
+              className="lg:w-1/2 space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.span 
+                className="inline-block text-primary font-medium"
+                variants={itemVariants}
+              >
+                Hello, I&apos;m John Doe
+              </motion.span>
+              
+              <motion.h1 
+                className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
+                variants={itemVariants}
+              >
+                Creating <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">digital experiences</span> that matter
+              </motion.h1>
+              
+              <motion.p 
+                className="text-xl text-muted-foreground max-w-xl"
+                variants={itemVariants}
+              >
+                Full-stack developer specializing in building exceptional digital 
+                experiences that are accessible, human-centered, and business-focused.
+              </motion.p>
+              
+              <motion.div 
+                className="flex flex-wrap gap-4 pt-2"
+                variants={itemVariants}
+              >
+                <Button size="lg" asChild>
+                  <Link href="/projects">
+                    <span>View My Work</span>
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/contact">
+                    <span>Contact Me</span>
+                  </Link>
+                </Button>
+              </motion.div>
+
+              <motion.div 
+                className="flex items-center gap-3 pt-4"
+                variants={itemVariants}
+              >
+                <div className="flex -space-x-2">
+                  {testimonials.map((testimonial) => (
+                    <Avatar key={testimonial.id} className="border-2 border-background w-8 h-8">
+                      <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                      <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                  ))}
+                </div>
+                <div className="flex items-center">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <span className="ml-2 text-sm text-muted-foreground">
+                    from <span className="font-medium text-foreground">20+ clients</span>
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+            
+            <motion.div 
+              className="lg:w-1/2 relative"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+                {/* Decorative elements */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-primary/20 blur-3xl"></div>
+                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-xl"></div>
+                <div className="absolute bottom-0 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"></div>
+                
+                {/* Profile image with glow effect */}
+                <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border/40 shadow-xl bg-background/90 backdrop-blur-sm p-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    alt="John Doe" 
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                  
+                  {/* Floating skill badges */}
+                  <Badge className="absolute top-6 -left-2 shadow-lg animate-float-slow" variant="secondary">
+                    React
+                  </Badge>
+                  <Badge className="absolute top-20 -right-2 shadow-lg animate-float-slow animation-delay-300" variant="secondary">
+                    Node.js
+                  </Badge>
+                  <Badge className="absolute bottom-16 -left-2 shadow-lg animate-float-slow animation-delay-700" variant="secondary">
+                    TypeScript
+                  </Badge>
+                  <Badge className="absolute bottom-6 right-4 shadow-lg animate-float-slow animation-delay-500" variant="secondary">
+                    UI/UX
+                  </Badge>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Featured Projects Section */}
+      <section className="py-20 bg-muted/50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight mb-2">Featured Projects</h2>
+              <p className="text-muted-foreground max-w-2xl">
+                A selection of my recent work. Each project was carefully crafted to solve specific challenges.
+              </p>
+            </div>
+            <Button variant="outline" asChild className="mt-4 md:mt-0">
+              <Link href="/projects">
+                <span>View All Projects</span>
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.slice(0, 3).map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <Card className="group h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300">
+                  <div className="relative overflow-hidden aspect-video">
+                    <img 
+                      src={project.imageUrl} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="default" asChild>
+                          <Link href={`/projects/${project.id}`}>
+                            <span>View Details</span>
+                          </Link>
+                        </Button>
+                        {project.demoUrl && (
+                          <Button size="sm" variant="outline" asChild>
+                            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">Live Demo</a>
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <CardHeader>
+                    <CardTitle>{project.title}</CardTitle>
+                    <CardDescription>{project.description}</CardDescription>
+                  </CardHeader>
+                  <CardFooter className="flex flex-wrap gap-2 mt-auto">
+                    {project.technologies.slice(0, 3).map((tech, i) => (
+                      <Badge key={i} variant="outline" className={tech.color}>{tech.name}</Badge>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <Badge variant="outline">+{project.technologies.length - 3}</Badge>
+                    )}
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Skills Overview */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight mb-2">My Skills</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              A comprehensive overview of my technical expertise and the technologies I specialize in.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Frontend Skills */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center">
+                <span className="inline-block w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
+                  <span className="font-bold">F</span>
+                </span>
+                Frontend Development
+              </h3>
+              
+              <div className="space-y-6">
+                {frontendSkills.map((skill, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="font-medium">{skill.name}</span>
+                      <span className="text-muted-foreground">{skill.percentage}%</span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-primary"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.percentage}%` }}
+                        transition={{ duration: 1, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            
+            {/* Backend Skills */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center">
+                <span className="inline-block w-10 h-10 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center mr-3">
+                  <span className="font-bold">B</span>
+                </span>
+                Backend Development
+              </h3>
+              
+              <div className="space-y-6">
+                {backendSkills.map((skill, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="font-medium">{skill.name}</span>
+                      <span className="text-muted-foreground">{skill.percentage}%</span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-purple-500"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.percentage}%` }}
+                        transition={{ duration: 1, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <Button asChild>
+              <Link href="/about">
+                <span>Learn More About Me</span>
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+      
+      {/* Testimonials Section */}
+      <section className="py-20 bg-muted/50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight mb-2">Client Testimonials</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Hear what my clients have to say about working with me.
+            </p>
+          </div>
+          
+          <Carousel className="w-full max-w-4xl mx-auto">
+            <CarouselContent>
+              {testimonials.map((testimonial) => (
+                <CarouselItem key={testimonial.id}>
+                  <Card className="border-none bg-transparent shadow-none">
+                    <CardContent className="flex flex-col items-center p-6">
+                      <div className="flex mb-6">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`h-5 w-5 ${i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} 
+                          />
+                        ))}
+                      </div>
+                      
+                      <p className="text-lg text-foreground text-center mb-6 font-medium">
+                        &quot;{testimonial.content}&quot;
+                      </p>
+                      
+                      <div className="flex flex-col items-center">
+                        <Avatar className="w-16 h-16 mb-3">
+                          <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                          <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div className="text-center">
+                          <h4 className="font-semibold">{testimonial.name}</h4>
+                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center mt-6 gap-2">
+              <CarouselPrevious className="static transform-none" />
+              <CarouselNext className="static transform-none" />
+            </div>
+          </Carousel>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 backdrop-blur-sm overflow-hidden p-8 md:p-12">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
+              <div className="max-w-2xl">
+                <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to bring your ideas to life?</h2>
+                <p className="text-lg text-muted-foreground">
+                  I&apos;m available for freelance projects and full-time opportunities. 
+                  Let&apos;s work together to create something amazing.
+                </p>
+              </div>
+              <Button size="lg" className="min-w-[150px]" asChild>
+                <Link href="/contact">
+                  <span>Get in Touch</span>
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default HomePage;

@@ -1,113 +1,126 @@
+// Project data
+
 export const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    description: "A full-featured online store with product catalog, shopping cart, and payment integration.",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    demoUrl: "#",
-    codeUrl: "#",
+    title: "E-Commerce Platform",
+    description: "A modern e-commerce platform with advanced filtering, cart functionality, and payment processing.",
+    imageUrl: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    demoUrl: "https://example.com/ecommerce-demo",
+    githubUrl: "https://github.com/example/ecommerce",
     technologies: [
-      { name: "React", color: "text-primary" },
-      { name: "Node.js", color: "text-accent" },
-      { name: "MongoDB", color: "text-secondary" },
-      { name: "Stripe", color: "text-blue-400" }
-    ]
+      { name: "React", color: "text-blue-500" },
+      { name: "Node.js", color: "text-green-500" },
+      { name: "MongoDB", color: "text-green-700" },
+      { name: "Stripe", color: "text-purple-500" },
+      { name: "Tailwind CSS", color: "text-sky-500" }
+    ],
+    category: "Web Application",
+    featured: true
   },
   {
     id: 2,
-    title: "Project Management App",
-    description: "A collaborative tool for teams to track progress, manage tasks, and meet deadlines.",
-    imageUrl: "https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    demoUrl: "#",
-    codeUrl: "#",
+    title: "Task Management App",
+    description: "A productivity tool for teams to manage projects, track progress, and collaborate effectively.",
+    imageUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    demoUrl: "https://example.com/task-app-demo",
+    githubUrl: "https://github.com/example/task-app",
     technologies: [
-      { name: "React", color: "text-primary" },
-      { name: "GraphQL", color: "text-accent" },
-      { name: "Firebase", color: "text-secondary" },
-      { name: "JavaScript", color: "text-yellow-400" }
-    ]
+      { name: "Vue.js", color: "text-emerald-500" },
+      { name: "Firebase", color: "text-yellow-500" },
+      { name: "Typescript", color: "text-blue-600" },
+      { name: "Sass", color: "text-pink-500" }
+    ],
+    category: "Web Application",
+    featured: true
   },
   {
     id: 3,
-    title: "Health & Fitness Tracker",
-    description: "A mobile-responsive application for tracking workouts, nutrition, and health metrics.",
-    imageUrl: "https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    demoUrl: "#",
-    codeUrl: "#",
+    title: "Fitness Tracking Dashboard",
+    description: "A comprehensive fitness tracker with data visualization, workout plans, and progress monitoring.",
+    imageUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    demoUrl: "https://example.com/fitness-demo",
+    githubUrl: "https://github.com/example/fitness-tracker",
     technologies: [
-      { name: "React Native", color: "text-primary" },
-      { name: "Express.js", color: "text-accent" },
-      { name: "PostgreSQL", color: "text-secondary" },
-      { name: "Redux", color: "text-red-400" }
-    ]
+      { name: "React", color: "text-blue-500" },
+      { name: "Chart.js", color: "text-pink-500" },
+      { name: "Express", color: "text-gray-600" },
+      { name: "PostgreSQL", color: "text-blue-700" }
+    ],
+    category: "Web Application",
+    featured: true
   },
   {
     id: 4,
-    title: "Blog Platform",
-    description: "A modern blogging platform with markdown support, comments, and social sharing.",
-    imageUrl: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    demoUrl: "#",
-    codeUrl: "#",
+    title: "Real-Time Chat Application",
+    description: "A secure messaging platform with real-time updates, file sharing, and channel management.",
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    demoUrl: "https://example.com/chat-demo",
+    githubUrl: "https://github.com/example/chat-app",
     technologies: [
-      { name: "Next.js", color: "text-primary" },
-      { name: "Tailwind CSS", color: "text-accent" },
-      { name: "Sanity.io", color: "text-secondary" },
-      { name: "TypeScript", color: "text-pink-400" }
-    ]
+      { name: "Socket.io", color: "text-gray-500" },
+      { name: "React", color: "text-blue-500" },
+      { name: "Node.js", color: "text-green-500" },
+      { name: "MongoDB", color: "text-green-700" }
+    ],
+    category: "Web Application",
+    featured: false
   },
   {
     id: 5,
-    title: "Weather Dashboard",
-    description: "An interactive weather application with forecasts, radar maps, and location search.",
-    imageUrl: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    demoUrl: "#",
-    codeUrl: "#",
+    title: "Weather Forecast App",
+    description: "A location-based weather application with hourly and weekly forecasts, and severe weather alerts.",
+    imageUrl: "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    demoUrl: "https://example.com/weather-demo",
+    githubUrl: "https://github.com/example/weather-app",
     technologies: [
-      { name: "Vue.js", color: "text-primary" },
-      { name: "OpenWeather API", color: "text-accent" },
-      { name: "Mapbox", color: "text-secondary" },
-      { name: "SCSS", color: "text-green-400" }
-    ]
+      { name: "React Native", color: "text-blue-400" },
+      { name: "Redux", color: "text-purple-600" },
+      { name: "OpenWeather API", color: "text-orange-500" }
+    ],
+    category: "Mobile App",
+    featured: false
   },
   {
     id: 6,
-    title: "AI Chat Application",
-    description: "A real-time chat application with AI-powered responses and language translation.",
-    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    demoUrl: "#",
-    codeUrl: "#",
+    title: "Personal Finance Manager",
+    description: "A tool to track personal expenses, create budgets, and visualize spending patterns.",
+    imageUrl: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    demoUrl: "https://example.com/finance-demo",
+    githubUrl: "https://github.com/example/finance-manager",
     technologies: [
-      { name: "React", color: "text-primary" },
-      { name: "Socket.io", color: "text-accent" },
-      { name: "OpenAI API", color: "text-secondary" },
-      { name: "AWS Lambda", color: "text-indigo-400" }
-    ]
+      { name: "Angular", color: "text-red-500" },
+      { name: "D3.js", color: "text-orange-500" },
+      { name: "Node.js", color: "text-green-500" },
+      { name: "MySQL", color: "text-blue-800" }
+    ],
+    category: "Web Application",
+    featured: false
   }
 ];
 
-// Frontend skills with percentages
+// Skills data
+
 export const frontendSkills = [
-  { name: "React / React Native", percentage: 90 },
-  { name: "JavaScript / TypeScript", percentage: 85 },
-  { name: "HTML5 / CSS3", percentage: 95 },
-  { name: "Redux / Context API", percentage: 80 },
-  { name: "Tailwind / Styled Components", percentage: 90 }
+  { name: "React", percentage: 95 },
+  { name: "TypeScript", percentage: 90 },
+  { name: "HTML/CSS", percentage: 95 },
+  { name: "Vue.js", percentage: 80 },
+  { name: "Angular", percentage: 75 }
 ];
 
-// Backend skills with percentages
 export const backendSkills = [
-  { name: "Node.js / Express", percentage: 85 },
-  { name: "Python / Django", percentage: 75 },
-  { name: "MongoDB / Mongoose", percentage: 80 },
-  { name: "SQL / PostgreSQL", percentage: 70 },
-  { name: "GraphQL / Apollo", percentage: 75 }
+  { name: "Node.js", percentage: 92 },
+  { name: "Express", percentage: 90 },
+  { name: "MongoDB", percentage: 85 },
+  { name: "PostgreSQL", percentage: 80 },
+  { name: "GraphQL", percentage: 75 }
 ];
 
-// Tools and other skills with percentages
 export const toolsSkills = [
-  { name: "Git / GitHub", percentage: 90 },
-  { name: "Docker / Kubernetes", percentage: 70 },
-  { name: "AWS / Firebase", percentage: 75 },
-  { name: "CI/CD (GitHub Actions)", percentage: 80 },
-  { name: "Figma / UI Design", percentage: 65 }
+  { name: "Git", percentage: 90 },
+  { name: "Docker", percentage: 85 },
+  { name: "AWS", percentage: 75 },
+  { name: "CI/CD", percentage: 80 },
+  { name: "Jest", percentage: 85 }
 ];
