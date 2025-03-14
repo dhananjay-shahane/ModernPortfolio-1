@@ -6,6 +6,18 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+const Beam = ({ children }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 /**
  * About page component
  * Displays detailed information about the developer, experience, education, and skills
@@ -82,7 +94,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="pt-24 pb-16">
+    <Beam className="pt-24 pb-16"> {/* Added Beam wrapper */}
       {/* Hero Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 md:px-6">
@@ -114,7 +126,7 @@ const AboutPage = () => {
                 {/* Background decoration */}
                 <div className="absolute -top-6 -left-6 w-full h-full bg-primary/10 rounded-2xl -z-10"></div>
                 <div className="absolute -bottom-6 -right-6 w-full h-full bg-purple-500/10 rounded-2xl -z-10"></div>
-                
+
                 {/* Profile image */}
                 <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border shadow-xl">
                   <img 
@@ -125,7 +137,7 @@ const AboutPage = () => {
                 </div>
               </div>
             </motion.div>
-            
+
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -148,7 +160,7 @@ const AboutPage = () => {
                   better solutions.
                 </p>
               </motion.div>
-              
+
               <motion.div variants={sectionVariants} className="flex flex-wrap gap-2">
                 <Badge variant="secondary" className="text-sm">JavaScript</Badge>
                 <Badge variant="secondary" className="text-sm">TypeScript</Badge>
@@ -159,7 +171,7 @@ const AboutPage = () => {
                 <Badge variant="secondary" className="text-sm">PostgreSQL</Badge>
                 <Badge variant="secondary" className="text-sm">GraphQL</Badge>
               </motion.div>
-              
+
               <motion.div variants={sectionVariants} className="pt-4">
                 <Button asChild>
                   <Link href="/contact">
@@ -172,7 +184,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Experience Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6">
@@ -188,7 +200,7 @@ const AboutPage = () => {
               A timeline of my professional journey and the companies I&apos;ve had the pleasure to work with.
             </p>
           </motion.div>
-          
+
           <div className="max-w-4xl mx-auto">
             {experiences.map((experience, index) => (
               <motion.div
@@ -203,14 +215,14 @@ const AboutPage = () => {
                 {index < experiences.length - 1 && (
                   <div className="absolute left-6 top-14 w-0.5 h-[calc(100%-2rem)] bg-border"></div>
                 )}
-                
+
                 {/* Timeline dot */}
                 <div className="relative z-10 mt-1.5">
                   <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center flex-shrink-0">
                     <Briefcase className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                
+
                 <div className="flex-1">
                   <div className="mb-1 flex items-center justify-between flex-wrap gap-2">
                     <h3 className="text-xl font-bold">{experience.title}</h3>
@@ -235,7 +247,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Education Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 md:px-6">
@@ -251,7 +263,7 @@ const AboutPage = () => {
               My academic background and qualifications that shaped my technical knowledge.
             </p>
           </motion.div>
-          
+
           <div className="max-w-4xl mx-auto">
             {education.map((item, index) => (
               <motion.div
@@ -266,14 +278,14 @@ const AboutPage = () => {
                 {index < education.length - 1 && (
                   <div className="absolute left-6 top-14 w-0.5 h-[calc(100%-2rem)] bg-border"></div>
                 )}
-                
+
                 {/* Timeline dot */}
                 <div className="relative z-10 mt-1.5">
                   <div className="w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/40 flex items-center justify-center flex-shrink-0">
                     <GraduationCap className="w-5 h-5 text-purple-500" />
                   </div>
                 </div>
-                
+
                 <div className="flex-1">
                   <div className="mb-1 flex items-center justify-between flex-wrap gap-2">
                     <h3 className="text-xl font-bold">{item.degree}</h3>
@@ -291,7 +303,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Certifications Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6">
@@ -307,7 +319,7 @@ const AboutPage = () => {
               Additional qualifications and recognitions I&apos;ve earned throughout my career.
             </p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
@@ -378,7 +390,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Personal Interests */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 md:px-6">
@@ -394,7 +406,7 @@ const AboutPage = () => {
               When I&apos;m not coding, you can find me exploring these interests and hobbies.
             </p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
@@ -436,7 +448,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6">
@@ -457,7 +469,7 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
-    </div>
+    </Beam> {/* Closed Beam wrapper */}
   );
 };
 
