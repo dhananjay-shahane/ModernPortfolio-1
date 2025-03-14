@@ -286,86 +286,118 @@ const HomePage = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* Frontend Skills */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true, margin: "-100px" }}
+              className="bg-card/50 backdrop-blur-sm border rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all"
             >
-              <h3 className="text-xl font-semibold mb-6 flex items-center">
-                <span className="inline-block w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
-                  <span className="font-bold">F</span>
-                </span>
-                Frontend Development
-              </h3>
+              <div className="flex items-center mb-8">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/80 to-primary/30 text-primary-foreground flex items-center justify-center mr-4 shadow-sm">
+                  <span className="font-bold text-xl">F</span>
+                </div>
+                <h3 className="text-2xl font-semibold">Frontend Development</h3>
+              </div>
               
-              <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {frontendSkills.map((skill, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-muted-foreground">{skill.percentage}%</span>
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors">
+                          <span className="text-xs font-medium text-primary">{index + 1}</span>
+                        </div>
+                        <span className="font-medium">{skill.name}</span>
+                      </div>
+                      <span className="text-sm text-muted-foreground font-medium">{skill.percentage}%</span>
                     </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-2.5 bg-muted/70 rounded-full overflow-hidden">
                       <motion.div 
-                        className="h-full bg-primary"
+                        className="h-full bg-gradient-to-r from-primary/80 to-primary/50 rounded-full"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.percentage}%` }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
+                        transition={{ duration: 1, delay: index * 0.05 }}
                         viewport={{ once: true }}
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
             
             {/* Backend Skills */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true, margin: "-100px" }}
+              className="bg-card/50 backdrop-blur-sm border rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all"
             >
-              <h3 className="text-xl font-semibold mb-6 flex items-center">
-                <span className="inline-block w-10 h-10 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center mr-3">
-                  <span className="font-bold">B</span>
-                </span>
-                Backend Development
-              </h3>
+              <div className="flex items-center mb-8">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/80 to-purple-500/30 text-white flex items-center justify-center mr-4 shadow-sm">
+                  <span className="font-bold text-xl">B</span>
+                </div>
+                <h3 className="text-2xl font-semibold">Backend Development</h3>
+              </div>
               
-              <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {backendSkills.map((skill, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-muted-foreground">{skill.percentage}%</span>
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center mr-3 group-hover:bg-purple-500/20 transition-colors">
+                          <span className="text-xs font-medium text-purple-500">{index + 1}</span>
+                        </div>
+                        <span className="font-medium">{skill.name}</span>
+                      </div>
+                      <span className="text-sm text-muted-foreground font-medium">{skill.percentage}%</span>
                     </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-2.5 bg-muted/70 rounded-full overflow-hidden">
                       <motion.div 
-                        className="h-full bg-purple-500"
+                        className="h-full bg-gradient-to-r from-purple-500/80 to-purple-500/50 rounded-full"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.percentage}%` }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
+                        transition={{ duration: 1, delay: index * 0.05 }}
                         viewport={{ once: true }}
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
           </div>
           
-          <div className="mt-12 text-center">
-            <Button asChild>
+          <motion.div 
+            className="mt-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <Button size="lg" className="px-8" asChild>
               <Link href="/about">
-                <span>Learn More About Me</span>
+                <span>View All Skills</span>
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
       

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -137,33 +137,101 @@ const Navbar = () => {
       {/* Mobile menu */}
       {isMobile && (
         <motion.div
-          className={`md:hidden ${isOpen ? "block" : "hidden"}`}
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? "auto" : 0 }}
-          transition={{ duration: 0.3 }}
+          className={`md:hidden fixed inset-0 z-50 ${isOpen ? "block" : "hidden"}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
         >
-          <div className="container mx-auto px-4 py-4 border-t">
-            <ul className="space-y-4">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href}>
-                    <span className={`block py-2 text-base font-medium transition-colors hover:text-primary cursor-pointer ${
-                      location === link.href ? "text-primary" : "text-muted-foreground"
-                    }`}>
-                      {link.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-              <li className="pt-2">
+          {/* Backdrop */}
+          <motion.div 
+            className="absolute inset-0 bg-background/80 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isOpen ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setIsOpen(false)}
+          />
+          
+          {/* Menu content */}
+          <motion.div
+            className="absolute top-[4rem] right-0 bottom-0 w-full max-w-xs bg-card border-l shadow-xl overflow-y-auto"
+            initial={{ x: "100%" }}
+            animate={{ x: isOpen ? 0 : "100%" }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-lg font-semibold">Menu</h2>
+                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+              
+              <nav>
+                <ul className="space-y-5">
+                  {navLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href}>
+                        <span 
+                          className={`group flex items-center py-2 text-base font-medium transition-colors hover:text-primary cursor-pointer ${
+                            location === link.href ? "text-primary" : "text-muted-foreground"
+                          }`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <div className={`w-1.5 h-1.5 rounded-full mr-3 transition-colors ${
+                            location === link.href ? "bg-primary" : "bg-muted-foreground/40 group-hover:bg-primary/40"
+                          }`}></div>
+                          {link.label}
+                          {location === link.href && (
+                            <motion.span
+                              className="ml-auto text-primary"
+                              layoutId="mobile-nav-indicator"
+                              transition={{ type: "spring", bounce: 0.2 }}
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                                <polyline points="9 18 15 12 9 6" />
+                              </svg>
+                            </motion.span>
+                          )}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              
+              <div className="mt-10 pt-6 border-t">
                 <Button asChild className="w-full">
-                  <Link href="/contact">
+                  <Link href="/contact" onClick={() => setIsOpen(false)}>
                     <span>Get In Touch</span>
                   </Link>
                 </Button>
-              </li>
-            </ul>
-          </div>
+              </div>
+              
+              <div className="mt-10 pt-6 border-t">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium">Theme</span>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="gap-2"
+                  >
+                    {theme === "dark" ? (
+                      <>
+                        <Sun className="h-4 w-4" /> 
+                        <span>Light</span>
+                      </>
+                    ) : (
+                      <>
+                        <Moon className="h-4 w-4" /> 
+                        <span>Dark</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </motion.header>
