@@ -1,10 +1,10 @@
 
 import * as React from "react";
 import { Link } from "wouter";
-import { Home, User, FolderKanban, Mail, Moon, Sun, Settings } from "lucide-react";
+import { Home, User, FolderKanban, Mail, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/theme-provider";
 
 export function Dock() {
   const { theme, setTheme } = useTheme();
@@ -41,11 +41,6 @@ export function Dock() {
           <Sun className="h-6 w-6 dark:hidden" />
           <Moon className="h-6 w-6 hidden dark:block" />
         </Button>
-        <Link href="/settings">
-          <Button variant="ghost" size="icon" className="rounded-full w-12 h-12 hover:bg-accent">
-            <Settings className="h-6 w-6" />
-          </Button>
-        </Link>
       </div>
     </div>
   );
