@@ -402,44 +402,64 @@ const HomePage = () => {
       </section>
       
       {/* Testimonials Section */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-purple-500/5"></div>
+        <div className="absolute inset-0">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-primary/5"
+              style={{
+                width: `${Math.random() * 300 + 100}px`,
+                height: `${Math.random() * 300 + 100}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `float ${Math.random() * 10 + 15}s infinite ease-in-out`,
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight mb-2">Client Testimonials</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Hear what my clients have to say about working with me.
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-primary to-purple-500 text-transparent bg-clip-text">
+              Client Testimonials
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Trusted by professionals worldwide. Here's what they say about working with me.
             </p>
           </div>
           
-          <Carousel className="w-full max-w-5xl mx-auto">
+          <Carousel className="w-full max-w-6xl mx-auto">
             <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <Card className="relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all">
-                    <CardContent className="p-6">
-                      <div className="absolute top-3 right-3">
-                        <div className="flex">
-                          {[...Array(5)].map((_, i) => (
-                            <Star 
-                              key={i} 
-                              className={`h-4 w-4 ${i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} 
-                            />
-                          ))}
-                        </div>
-                      </div>
+                  <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <CardContent className="p-8 relative">
+                      <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors duration-500"></div>
                       
-                      <div className="flex items-center gap-4 mb-4">
-                        <Avatar className="w-12 h-12 border-2 border-border">
-                          <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                      <div className="flex items-center gap-4 mb-6">
+                        <Avatar className="w-16 h-16 border-4 border-background shadow-xl group-hover:border-primary/20 transition-colors duration-500">
+                          <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="object-cover" />
                           <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <h4 className="font-semibold">{testimonial.name}</h4>
+                          <h4 className="text-lg font-semibold">{testimonial.name}</h4>
                           <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                         </div>
                       </div>
                       
-                      <p className="text-foreground/90">
+                      <div className="flex mb-6">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`h-5 w-5 ${i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground"} transition-colors duration-300`} 
+                          />
+                        ))}
+                      </div>
+                      
+                      <p className="text-lg font-medium leading-relaxed text-foreground/90 italic">
                         &quot;{testimonial.content}&quot;
                       </p>
                     </CardContent>
@@ -447,9 +467,9 @@ const HomePage = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-end mt-6 gap-2">
-              <CarouselPrevious className="relative" />
-              <CarouselNext className="relative" />
+            <div className="flex justify-center mt-8 gap-4">
+              <CarouselPrevious className="relative hover:bg-primary hover:text-primary-foreground" />
+              <CarouselNext className="relative hover:bg-primary hover:text-primary-foreground" />
             </div>
           </Carousel>
         </div>
