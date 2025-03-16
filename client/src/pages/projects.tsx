@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Filter, Search, ChevronRight } from "lucide-react";
+import { Filter, Search, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { projects } from "@/lib/data";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
+
 
 /**
  * Projects page component
@@ -25,36 +27,37 @@ const ProjectsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredProjects, setFilteredProjects] = useState(projects);
-  
+  const [selectedProject, setSelectedProject] = useState(null);
+
   // Extract all unique categories from projects
   const allCategories = ["all", ...new Set(
-    projects.flatMap(project => 
+    projects.flatMap(project =>
       project.technologies.map(tech => tech.name)
     )
   )];
-  
+
   // Filter projects based on search query and selected category
   useEffect(() => {
     let result = projects;
-    
+
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(project => 
-        project.title.toLowerCase().includes(query) || 
+      result = result.filter(project =>
+        project.title.toLowerCase().includes(query) ||
         project.description.toLowerCase().includes(query)
       );
     }
-    
+
     // Filter by category
     if (selectedCategory !== "all") {
-      result = result.filter(project => 
-        project.technologies.some(tech => 
+      result = result.filter(project =>
+        project.technologies.some(tech =>
           tech.name.toLowerCase() === selectedCategory.toLowerCase()
         )
       );
     }
-    
+
     setFilteredProjects(result);
   }, [searchQuery, selectedCategory]);
 
@@ -71,8 +74,8 @@ const ProjectsPage = () => {
 
   const projectVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.5 }
     }
@@ -83,7 +86,7 @@ const ProjectsPage = () => {
       {/* Hero Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
+          <motion.div
             className="text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,7 +103,7 @@ const ProjectsPage = () => {
       {/* Filter and Search Section */}
       <section className="py-4">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
+          <motion.div
             className="rounded-lg border bg-card p-6 shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,19 +112,19 @@ const ProjectsPage = () => {
             <div className="flex flex-col md:flex-row gap-4 items-center">
               <div className="relative w-full md:w-auto md:flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  type="text" 
-                  placeholder="Search projects..." 
+                <Input
+                  type="text"
+                  placeholder="Search projects..."
                   className="pl-10"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              
+
               <div className="flex items-center gap-2 w-full md:w-auto">
                 <Filter className="h-4 w-4 text-muted-foreground" />
-                <Select 
-                  value={selectedCategory} 
+                <Select
+                  value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
                   <SelectTrigger className="w-full md:w-[180px]">
@@ -160,9 +163,9 @@ const ProjectsPage = () => {
                 >
                   <Card className="group h-full flex flex-col overflow-hidden border-2 border-border/30 hover:border-primary/50 transition-all duration-300 bg-gradient-to-br from-background/80 to-muted/50 backdrop-blur-sm hover:shadow-xl hover:shadow-primary/5">
                     <div className="relative overflow-hidden aspect-video">
-                      <img 
-                        src={project.imageUrl} 
-                        alt={project.title} 
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
                         className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/95 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
@@ -172,8 +175,13 @@ const ProjectsPage = () => {
                             <p className="text-sm text-white/80 line-clamp-2">{project.description}</p>
                           </div>
                           <div className="flex gap-2 ml-4">
-                            <Button size="sm" variant="default" className="bg-primary/90 hover:bg-primary shadow-lg" asChild>
-                              <Link href={`/projects/${project.id}`}>Details</Link>
+                            <Button
+                              size="sm"
+                              variant="default"
+                              className="bg-primary/90 hover:bg-primary shadow-lg"
+                              onClick={() => setSelectedProject(project)}
+                            >
+                              View Details
                             </Button>
                             {project.demoUrl && (
                               <Button size="sm" variant="secondary" className="shadow-lg backdrop-blur-sm hover:bg-secondary/80" asChild>
@@ -190,9 +198,9 @@ const ProjectsPage = () => {
                     </CardHeader>
                     <CardFooter className="flex flex-wrap gap-2 mt-auto">
                       {project.technologies.map((tech, i) => (
-                        <Badge 
-                          key={i} 
-                          variant="outline" 
+                        <Badge
+                          key={i}
+                          variant="outline"
                           className={tech.color}
                           onClick={() => setSelectedCategory(tech.name)}
                         >
@@ -217,8 +225,8 @@ const ProjectsPage = () => {
                 <p className="text-muted-foreground mb-4">
                   No projects match your current search criteria.
                 </p>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={() => {
                     setSearchQuery("");
                     setSelectedCategory("all");
@@ -230,12 +238,30 @@ const ProjectsPage = () => {
             )}
           </motion.div>
         </div>
+        {selectedProject && (
+          <Dialog open={!!selectedProject} onOpenChange={setSelectedProject}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{selectedProject.title}</DialogTitle>
+                <DialogClose />
+              </DialogHeader>
+              <div className="p-4">
+                  <img src={selectedProject.imageUrl} alt={selectedProject.title} className="w-full rounded-lg" />
+                  <p className="mt-4 text-lg">{selectedProject.description}</p>
+                  <ul className="mt-4 list-disc">
+                      {selectedProject.technologies.map((tech,i) => <li key={i}>{tech.name}</li>)}
+                  </ul>
+                  {selectedProject.demoUrl && (<a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer">Demo</a>)}
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
+          <motion.div
             className="rounded-2xl bg-muted p-8 md:p-12 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

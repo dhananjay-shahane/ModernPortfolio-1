@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { frontendSkills, backendSkills, projects } from "@/lib/data";
+import { useState } from 'react';
 
 /**
  * Home page component
@@ -20,6 +21,7 @@ import { frontendSkills, backendSkills, projects } from "@/lib/data";
  * Includes animations and interactive elements
  */
 const HomePage = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
   // Animation variants for staggered animations
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -78,7 +80,7 @@ const HomePage = () => {
       <section className="relative min-h-[90vh] flex items-center py-16 overflow-hidden">
         {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient-slow"></div>
-        
+
         {/* Animated particles (decorative elements) */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
@@ -111,14 +113,14 @@ const HomePage = () => {
               >
                 Hello, I'm John Doe
               </motion.span>
-              
+
               <motion.h1 
                 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
                 variants={itemVariants}
               >
                 Creating <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">digital experiences</span> that matter
               </motion.h1>
-              
+
               <motion.p 
                 className="text-xl text-muted-foreground max-w-xl"
                 variants={itemVariants}
@@ -126,7 +128,7 @@ const HomePage = () => {
                 Full-stack developer specializing in building exceptional digital 
                 experiences that are accessible, human-centered, and business-focused.
               </motion.p>
-              
+
               <motion.div 
                 className="flex flex-wrap gap-4 pt-2"
                 variants={itemVariants}
@@ -167,7 +169,7 @@ const HomePage = () => {
                 </div>
               </motion.div>
             </motion.div>
-            
+
             <motion.div 
               className="lg:w-1/2 relative"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -179,7 +181,7 @@ const HomePage = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-primary/20 blur-3xl"></div>
                 <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-xl"></div>
                 <div className="absolute bottom-0 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"></div>
-                
+
                 {/* Profile image with glow effect */}
                 <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border/40 shadow-xl bg-background/90 backdrop-blur-sm p-3">
                   <img 
@@ -187,7 +189,7 @@ const HomePage = () => {
                     alt="John Doe" 
                     className="w-full h-full object-cover rounded-xl"
                   />
-                  
+
                   {/* Floating skill badges */}
                   <Badge className="absolute top-6 -left-2 shadow-lg animate-float-slow" variant="secondary">
                     React
@@ -207,7 +209,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Featured Projects Section */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6">
@@ -225,7 +227,7 @@ const HomePage = () => {
               </Link>
             </Button>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.slice(0, 3).map((project, index) => (
               <motion.div
@@ -249,10 +251,8 @@ const HomePage = () => {
                           <p className="text-sm text-white/80 line-clamp-2">{project.description}</p>
                         </div>
                         <div className="flex gap-2 ml-4">
-                          <Button size="sm" variant="default" className="bg-primary/90 hover:bg-primary shadow-lg" asChild>
-                            <Link href={`/projects/${project.id}`}>
-                              <span>Details</span>
-                            </Link>
+                          <Button size="sm" variant="default" className="bg-primary/90 hover:bg-primary shadow-lg" onClick={() => setSelectedProject(project)} asChild>
+                            <span>Details</span>
                           </Button>
                           {project.demoUrl && (
                             <Button size="sm" variant="secondary" className="shadow-lg backdrop-blur-sm hover:bg-secondary/80" asChild>
@@ -281,7 +281,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Skills Overview */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
@@ -291,7 +291,7 @@ const HomePage = () => {
               A comprehensive overview of my technical expertise and the technologies I specialize in.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* Frontend Skills */}
             <motion.div
@@ -307,7 +307,7 @@ const HomePage = () => {
                 </div>
                 <h3 className="text-2xl font-semibold">Frontend Development</h3>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {frontendSkills.map((skill, index) => (
                   <motion.div 
@@ -340,7 +340,7 @@ const HomePage = () => {
                 ))}
               </div>
             </motion.div>
-            
+
             {/* Backend Skills */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -355,7 +355,7 @@ const HomePage = () => {
                 </div>
                 <h3 className="text-2xl font-semibold">Backend Development</h3>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {backendSkills.map((skill, index) => (
                   <motion.div 
@@ -389,7 +389,7 @@ const HomePage = () => {
               </div>
             </motion.div>
           </div>
-          
+
           <motion.div 
             className="mt-12 text-center"
             initial={{ opacity: 0, y: 20 }}
@@ -406,7 +406,7 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-      
+
       {/* Testimonials Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-purple-500/5"></div>
@@ -425,7 +425,7 @@ const HomePage = () => {
             />
           ))}
         </div>
-        
+
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-primary to-purple-500 text-transparent bg-clip-text">
@@ -435,7 +435,7 @@ const HomePage = () => {
               Trusted by professionals worldwide. Here's what they say about working with me.
             </p>
           </div>
-          
+
           <Carousel className="w-full max-w-6xl mx-auto">
             <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial) => (
@@ -444,7 +444,7 @@ const HomePage = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <CardContent className="p-8 relative">
                       <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors duration-500"></div>
-                      
+
                       <div className="flex items-center gap-4 mb-6">
                         <Avatar className="w-16 h-16 border-4 border-background shadow-xl group-hover:border-primary/20 transition-colors duration-500">
                           <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="object-cover" />
@@ -455,7 +455,7 @@ const HomePage = () => {
                           <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex mb-6">
                         {[...Array(5)].map((_, i) => (
                           <Star 
@@ -464,7 +464,7 @@ const HomePage = () => {
                           />
                         ))}
                       </div>
-                      
+
                       <p className="text-lg font-medium leading-relaxed text-foreground/90 italic">
                         &quot;{testimonial.content}&quot;
                       </p>
@@ -480,7 +480,7 @@ const HomePage = () => {
           </Carousel>
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
@@ -488,7 +488,7 @@ const HomePage = () => {
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
-            
+
             <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
               <div className="max-w-2xl">
                 <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to bring your ideas to life?</h2>
@@ -506,6 +506,26 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+const ProjectModal = ({ project, isOpen, onClose }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-xl font-bold mb-4">{project.title}</h2>
+        <p>{project.description}</p>
+        <button onClick={onClose}>Close</button>
+      </div>
     </div>
   );
 };
