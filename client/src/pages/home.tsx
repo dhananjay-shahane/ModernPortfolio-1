@@ -411,43 +411,45 @@ const HomePage = () => {
             </p>
           </div>
           
-          <Carousel className="w-full max-w-4xl mx-auto">
-            <CarouselContent>
+          <Carousel className="w-full max-w-5xl mx-auto">
+            <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.id}>
-                  <Card className="border-none bg-transparent shadow-none">
-                    <CardContent className="flex flex-col items-center p-6">
-                      <div className="flex mb-6">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className={`h-5 w-5 ${i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} 
-                          />
-                        ))}
+                <CarouselItem key={testimonial.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <Card className="relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all">
+                    <CardContent className="p-6">
+                      <div className="absolute top-3 right-3">
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <Star 
+                              key={i} 
+                              className={`h-4 w-4 ${i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} 
+                            />
+                          ))}
+                        </div>
                       </div>
                       
-                      <p className="text-lg text-foreground text-center mb-6 font-medium">
-                        &quot;{testimonial.content}&quot;
-                      </p>
-                      
-                      <div className="flex flex-col items-center">
-                        <Avatar className="w-16 h-16 mb-3">
+                      <div className="flex items-center gap-4 mb-4">
+                        <Avatar className="w-12 h-12 border-2 border-border">
                           <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
                           <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                         </Avatar>
-                        <div className="text-center">
+                        <div>
                           <h4 className="font-semibold">{testimonial.name}</h4>
                           <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                         </div>
                       </div>
+                      
+                      <p className="text-foreground/90">
+                        &quot;{testimonial.content}&quot;
+                      </p>
                     </CardContent>
                   </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center mt-6 gap-2">
-              <CarouselPrevious className="static transform-none" />
-              <CarouselNext className="static transform-none" />
+            <div className="flex justify-end mt-6 gap-2">
+              <CarouselPrevious className="relative" />
+              <CarouselNext className="relative" />
             </div>
           </Carousel>
         </div>
