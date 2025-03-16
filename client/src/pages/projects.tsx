@@ -158,29 +158,35 @@ const ProjectsPage = () => {
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Card className="group h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 bg-gradient-to-br from-background to-muted">
+                  <Card className="group h-full flex flex-col overflow-hidden border-2 border-border/30 hover:border-primary/50 transition-all duration-300 bg-gradient-to-br from-background/80 to-muted/50 backdrop-blur-sm hover:shadow-xl hover:shadow-primary/5">
                     <div className="relative overflow-hidden aspect-video">
                       <img 
                         src={project.imageUrl} 
                         alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm flex items-end justify-center p-4">
-                        <div className="flex gap-3">
-                          <Button size="sm" variant="default" className="shadow-lg hover:shadow-primary/20" asChild>
-                            <Link href={`/projects/${project.id}`}>View Details</Link>
-                          </Button>
-                          {project.demoUrl && (
-                            <Button size="sm" variant="outline" className="shadow-lg backdrop-blur-sm bg-background/50" asChild>
-                              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">Live Demo</a>
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/95 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                          <div className="space-y-1">
+                            <h3 className="font-bold text-lg text-white">{project.title}</h3>
+                            <p className="text-sm text-white/80 line-clamp-2">{project.description}</p>
+                          </div>
+                          <div className="flex gap-2 ml-4">
+                            <Button size="sm" variant="default" className="bg-primary/90 hover:bg-primary shadow-lg" asChild>
+                              <Link href={`/projects/${project.id}`}>Details</Link>
                             </Button>
-                          )}
+                            {project.demoUrl && (
+                              <Button size="sm" variant="secondary" className="shadow-lg backdrop-blur-sm hover:bg-secondary/80" asChild>
+                                <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">Demo</a>
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="text-xl font-bold tracking-tight">{project.title}</CardTitle>
-                      <CardDescription>{project.description}</CardDescription>
+                    <CardHeader className="relative">
+                      <CardTitle className="text-xl font-bold tracking-tight group-hover:text-primary transition-colors">{project.title}</CardTitle>
+                      <CardDescription className="line-clamp-2">{project.description}</CardDescription>
                     </CardHeader>
                     <CardFooter className="flex flex-wrap gap-2 mt-auto">
                       {project.technologies.map((tech, i) => (
