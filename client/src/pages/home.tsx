@@ -77,34 +77,19 @@ const HomePage = () => {
       {/* Hero Section - with animated gradient background and particles */}
       <section className="relative min-h-[90vh] flex items-center py-16 overflow-hidden">
         {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient-slow"></div>
-        
-        {/* Animated particles (decorative elements) */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-primary/10"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 50 + 10}px`,
-                height: `${Math.random() * 50 + 10}px`,
-                animationDuration: `${Math.random() * 20 + 10}s`,
-                animationDelay: `${Math.random() * 2}s`
-              }}
-            ></div>
-          ))}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient-slow"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_107%,rgba(214,168,255,0.1),transparent_25%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_107%,rgba(56,189,248,0.1),transparent_25%)]"></div>
         </div>
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <motion.div 
-              className="lg:w-1/2 space-y-6"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
+          <motion.div 
+            className="max-w-3xl mx-auto text-center space-y-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
               <motion.span 
                 className="inline-block text-primary font-medium"
                 variants={itemVariants}
@@ -113,14 +98,14 @@ const HomePage = () => {
               </motion.span>
               
               <motion.h1 
-                className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
                 variants={itemVariants}
               >
                 Creating <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">digital experiences</span> that matter
               </motion.h1>
               
               <motion.p 
-                className="text-xl text-muted-foreground max-w-xl"
+                className="text-xl text-muted-foreground mx-auto"
                 variants={itemVariants}
               >
                 Full-stack developer specializing in building exceptional digital 
@@ -128,15 +113,15 @@ const HomePage = () => {
               </motion.p>
               
               <motion.div 
-                className="flex flex-wrap gap-4 pt-2"
+                className="flex flex-wrap justify-center gap-4 pt-8"
                 variants={itemVariants}
               >
-                <Button size="lg" asChild>
+                <Button size="lg" className="min-w-[160px]" asChild>
                   <Link href="/projects">
                     <span>View My Work</span>
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outline" className="min-w-[160px]" asChild>
                   <Link href="/contact">
                     <span>Contact Me</span>
                   </Link>
@@ -144,65 +129,20 @@ const HomePage = () => {
               </motion.div>
 
               <motion.div 
-                className="flex items-center gap-3 pt-4"
+                className="flex items-center justify-center gap-3 pt-8"
                 variants={itemVariants}
               >
-                <div className="flex -space-x-2">
-                  {testimonials.map((testimonial) => (
-                    <Avatar key={testimonial.id} className="border-2 border-background w-8 h-8">
-                      <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                      <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  ))}
-                </div>
-                <div className="flex items-center">
+                <div className="flex items-center gap-4">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                      <Star key={i} className="h-5 w-5 fill-primary text-primary" />
                     ))}
                   </div>
-                  <span className="ml-2 text-sm text-muted-foreground">
-                    from <span className="font-medium text-foreground">20+ clients</span>
+                  <span className="text-muted-foreground">
+                    Trusted by <span className="font-medium text-foreground">20+ clients</span>
                   </span>
                 </div>
               </motion.div>
-            </motion.div>
-            
-            <motion.div 
-              className="lg:w-1/2 relative"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <div className="relative w-full aspect-square max-w-[500px] mx-auto">
-                {/* Decorative elements */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-primary/20 blur-3xl"></div>
-                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-xl"></div>
-                <div className="absolute bottom-0 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"></div>
-                
-                {/* Profile image with glow effect */}
-                <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border/40 shadow-xl bg-background/90 backdrop-blur-sm p-3">
-                  <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                    alt="John Doe" 
-                    className="w-full h-full object-cover rounded-xl"
-                  />
-                  
-                  {/* Floating skill badges */}
-                  <Badge className="absolute top-6 -left-2 shadow-lg animate-float-slow" variant="secondary">
-                    React
-                  </Badge>
-                  <Badge className="absolute top-20 -right-2 shadow-lg animate-float-slow animation-delay-300" variant="secondary">
-                    Node.js
-                  </Badge>
-                  <Badge className="absolute bottom-16 -left-2 shadow-lg animate-float-slow animation-delay-700" variant="secondary">
-                    TypeScript
-                  </Badge>
-                  <Badge className="absolute bottom-6 right-4 shadow-lg animate-float-slow animation-delay-500" variant="secondary">
-                    UI/UX
-                  </Badge>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
