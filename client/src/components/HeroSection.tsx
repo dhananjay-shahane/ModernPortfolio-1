@@ -38,63 +38,59 @@ const HeroSection = () => {
     }
   };
 
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { 
-        duration: 0.7, 
-        ease: "easeOut",
-        delay: 0.7
-      }
-    }
-  };
-
   return (
-    <section id="home" className="min-h-[85vh] flex items-center justify-center py-8 sm:py-12">
-      <div className="container mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center">
+    <section id="home" className="relative min-h-[85vh] flex items-center justify-center py-8 sm:py-12 overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient-slow"></div>
+
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div 
-          className="lg:w-1/2 flex flex-col items-start space-y-4 sm:space-y-6"
+          className="max-w-3xl mx-auto text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.p 
-            className="text-primary font-medium text-lg"
+            className="text-primary font-medium text-lg mb-4"
             variants={childVariants}
           >
             Hi there, I'm
           </motion.p>
 
           <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
             variants={childVariants}
           >
             <span className="text-white">Dhananjay Shahane</span>
           </motion.h1>
 
           <motion.h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-400"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-400 mb-6"
             variants={childVariants}
           >
             Frontend Developer
           </motion.h2>
 
           <motion.p 
-            className="text-slate-400 max-w-xl text-base sm:text-lg"
+            className="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-8"
             variants={childVariants}
           >
             I specialize in crafting responsive and intuitive web interfaces using modern technologies like React, TypeScript, and Tailwind CSS. Passionate about creating seamless user experiences that bring ideas to life.
           </motion.p>
 
           <motion.div 
-            className="flex flex-wrap gap-4 pt-2"
+            className="flex flex-wrap justify-center gap-4"
             variants={childVariants}
           >
             <motion.a 
               href="#projects" 
-              className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md font-medium transition-all"
+              className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium transition-all text-lg"
               variants={buttonVariants}
               whileHover="hover"
             >
@@ -103,28 +99,13 @@ const HeroSection = () => {
 
             <motion.a 
               href="#contact" 
-              className="border border-primary text-primary hover:bg-primary/10 px-4 sm:px-6 py-2 sm:py-3 rounded-md font-medium transition-all"
+              className="border border-primary text-primary hover:bg-primary/10 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium transition-all text-lg"
               variants={buttonVariants}
               whileHover="hover"
             >
               Contact Me
             </motion.a>
           </motion.div>
-        </motion.div>
-
-        <motion.div 
-          className="lg:w-1/2 mt-8 lg:mt-0 flex justify-center"
-          variants={imageVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="relative w-60 h-60 sm:w-72 sm:h-72 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full overflow-hidden shadow-xl">
-            <img 
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Dhananjay Shahane" 
-              className="w-full h-full object-cover"
-            />
-          </div>
         </motion.div>
       </div>
     </section>
