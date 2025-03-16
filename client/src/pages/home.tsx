@@ -48,27 +48,27 @@ const HomePage = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Johnson",
-      role: "CEO, TechStart",
-      avatar: "https://randomuser.me/api/portraits/women/67.jpg",
-      content: "John is an exceptional developer who delivered our project ahead of schedule. His attention to detail and problem-solving skills are outstanding.",
+      name: "Akash Patel",
+      role: "Tech Lead, WebStack Solutions",
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      content: "Dhananjay's expertise in React and attention to detail resulted in a pixel-perfect implementation of our design system.",
       rating: 5
     },
     {
       id: 2,
-      name: "Michael Chen",
-      role: "Product Manager, InnovateCorp",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-      content: "Working with John was a pleasure. He understood our requirements perfectly and suggested improvements that made our product even better.",
+      name: "Priya Sharma",
+      role: "Product Manager, InnovateTech",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+      content: "Working with Dhananjay was great. His frontend skills and commitment to creating responsive, user-friendly interfaces are impressive.",
       rating: 5
     },
     {
       id: 3,
-      name: "Emily Rodriguez",
-      role: "Founder, DesignHub",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-      content: "John&apos;s ability to translate our design vision into functional code was impressive. He&apos;s both technically skilled and creatively minded.",
-      rating: 4
+      name: "Rahul Verma",
+      role: "Founder, DesignFirst",
+      avatar: "https://randomuser.me/api/portraits/men/67.jpg",
+      content: "Dhananjay's ability to translate complex designs into smooth, interactive web experiences exceeded our expectations.",
+      rating: 5
     }
   ];
 
@@ -109,7 +109,7 @@ const HomePage = () => {
                 className="inline-block text-primary font-medium"
                 variants={itemVariants}
               >
-                Hello, I&apos;m John Doe
+                Hello, I'm John Doe
               </motion.span>
               
               <motion.h1 
@@ -465,8 +465,8 @@ const HomePage = () => {
               <div className="max-w-2xl">
                 <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to bring your ideas to life?</h2>
                 <p className="text-lg text-muted-foreground">
-                  I&apos;m available for freelance projects and full-time opportunities. 
-                  Let&apos;s work together to create something amazing.
+                  I'm available for freelance projects and full-time opportunities. 
+                  Let's work together to create something amazing.
                 </p>
               </div>
               <Button size="lg" className="min-w-[150px]" asChild>

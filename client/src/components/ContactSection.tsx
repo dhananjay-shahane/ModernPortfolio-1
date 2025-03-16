@@ -39,7 +39,7 @@ const ContactSection = () => {
 
   // Contact form mutation
   const mutation = useMutation({
-    mutationFn: (data: FormValues) => 
+    mutationFn: (data: FormValues) =>
       apiRequest("POST", "/api/contact", data),
     onSuccess: async (response) => {
       const data = await response.json();
@@ -77,8 +77,8 @@ const ContactSection = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" }
     }
@@ -88,14 +88,14 @@ const ContactSection = () => {
     <section id="contact" className="py-20 bg-dark">
       <div className="container mx-auto px-6">
         <SectionHeading title="Contact Me" />
-        
+
         <p className="text-slate-400 mt-4 max-w-2xl text-center mx-auto mb-12">
           Have a question or want to work together? Feel free to contact me using the form below or through social media.
         </p>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div 
+          <motion.div
             className="bg-dark-light p-8 rounded-lg shadow-lg"
             variants={containerVariants}
             initial="hidden"
@@ -112,8 +112,8 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel className="text-slate-300">Name</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="Your name" 
+                          <Input
+                            placeholder="Your name"
                             className="bg-dark border-slate-700 text-white focus:ring-primary"
                             {...field}
                           />
@@ -123,7 +123,7 @@ const ContactSection = () => {
                     )}
                   />
                 </motion.div>
-                
+
                 <motion.div variants={itemVariants}>
                   <FormField
                     control={form.control}
@@ -132,8 +132,8 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel className="text-slate-300">Email</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="your@email.com" 
+                          <Input
+                            placeholder="your@email.com"
                             className="bg-dark border-slate-700 text-white focus:ring-primary"
                             {...field}
                           />
@@ -143,7 +143,7 @@ const ContactSection = () => {
                     )}
                   />
                 </motion.div>
-                
+
                 <motion.div variants={itemVariants}>
                   <FormField
                     control={form.control}
@@ -152,8 +152,8 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel className="text-slate-300">Subject</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="Subject of your message" 
+                          <Input
+                            placeholder="Subject of your message"
                             className="bg-dark border-slate-700 text-white focus:ring-primary"
                             {...field}
                           />
@@ -163,7 +163,7 @@ const ContactSection = () => {
                     )}
                   />
                 </motion.div>
-                
+
                 <motion.div variants={itemVariants}>
                   <FormField
                     control={form.control}
@@ -172,8 +172,8 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel className="text-slate-300">Message</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            placeholder="Your message here..." 
+                          <Textarea
+                            placeholder="Your message here..."
                             rows={5}
                             className="bg-dark border-slate-700 text-white focus:ring-primary resize-none"
                             {...field}
@@ -184,9 +184,9 @@ const ContactSection = () => {
                     )}
                   />
                 </motion.div>
-                
+
                 <motion.div variants={itemVariants}>
-                  <Button 
+                  <Button
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-md transition-colors font-medium"
                     disabled={mutation.isPending}
@@ -197,9 +197,9 @@ const ContactSection = () => {
               </form>
             </Form>
           </motion.div>
-          
+
           {/* Contact Information */}
-          <motion.div 
+          <motion.div
             className="flex flex-col justify-between"
             variants={containerVariants}
             initial="hidden"
@@ -207,15 +207,15 @@ const ContactSection = () => {
             viewport={{ once: true, amount: 0.1 }}
           >
             <div>
-              <motion.h3 
+              <motion.h3
                 className="text-2xl font-bold text-white mb-6"
                 variants={itemVariants}
               >
                 Get In Touch
               </motion.h3>
-              
+
               <div className="space-y-6">
-                <motion.div 
+                <motion.div
                   className="flex items-start"
                   variants={itemVariants}
                 >
@@ -224,16 +224,16 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-white">Email</h4>
-                    <a 
-                      href="mailto:john.doe@example.com" 
+                    <a
+                      href="mailto:dhananjay.shahane@example.com"
                       className="text-slate-400 hover:text-primary transition-colors"
                     >
-                      john.doe@example.com
+                      dhananjay.shahane@example.com
                     </a>
                   </div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="flex items-start"
                   variants={itemVariants}
                 >
@@ -242,16 +242,16 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-white">Phone</h4>
-                    <a 
-                      href="tel:+1234567890" 
+                    <a
+                      href="tel:+918889990000"
                       className="text-slate-400 hover:text-primary transition-colors"
                     >
-                      +1 (234) 567-890
+                      +91 888 999 0000
                     </a>
                   </div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="flex items-start"
                   variants={itemVariants}
                 >
@@ -260,14 +260,14 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-white">Location</h4>
-                    <p className="text-slate-400">San Francisco, California</p>
+                    <p className="text-slate-400">Mumbai, Maharashtra, India</p>
                   </div>
                 </motion.div>
               </div>
             </div>
-            
+
             {/* Social Media Links */}
-            <motion.div 
+            <motion.div
               className="mt-12"
               variants={itemVariants}
             >
