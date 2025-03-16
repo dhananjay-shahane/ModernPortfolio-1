@@ -24,7 +24,7 @@ const Footer = () => {
       {/* Decorative Footer Image */}
       <div className="absolute bottom-0 left-0 right-0 w-full">
         <img 
-          src="/attached_assets/footer.jpg" 
+          src="../../attached_assets/footer.jpg" 
           alt="Decorative footer" 
           className="w-full h-auto object-cover"
           style={{ maxHeight: '120px' }}
