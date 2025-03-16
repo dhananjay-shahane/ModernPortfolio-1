@@ -158,28 +158,28 @@ const ProjectsPage = () => {
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Card className="group h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300">
+                  <Card className="group h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 bg-gradient-to-br from-background to-muted">
                     <div className="relative overflow-hidden aspect-video">
                       <img 
                         src={project.imageUrl} 
                         alt={project.title} 
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="default" asChild>
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm flex items-end justify-center p-4">
+                        <div className="flex gap-3">
+                          <Button size="sm" variant="default" className="shadow-lg hover:shadow-primary/20" asChild>
                             <Link href={`/projects/${project.id}`}>View Details</Link>
                           </Button>
                           {project.demoUrl && (
-                            <Button size="sm" variant="outline" asChild>
+                            <Button size="sm" variant="outline" className="shadow-lg backdrop-blur-sm bg-background/50" asChild>
                               <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">Live Demo</a>
                             </Button>
                           )}
                         </div>
                       </div>
                     </div>
-                    <CardHeader>
-                      <CardTitle>{project.title}</CardTitle>
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-xl font-bold tracking-tight">{project.title}</CardTitle>
                       <CardDescription>{project.description}</CardDescription>
                     </CardHeader>
                     <CardFooter className="flex flex-wrap gap-2 mt-auto">
