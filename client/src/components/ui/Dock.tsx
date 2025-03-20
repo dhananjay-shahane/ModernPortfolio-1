@@ -27,11 +27,10 @@ export function Dock() {
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
       <div className="flex items-center gap-1 rounded-full bg-background/80 p-2 shadow-lg backdrop-blur-md">
         {links.map(({ path, icon: Icon, label }) => (
-          <Link key={path} href={path}>
+          <Link key={path} href={path} onClick={scrollToTop}>
             <Button
               variant="ghost"
               size="icon"
-              onClick={scrollToTop}
               className={cn(
                 "rounded-full transition-all",
                 location === path && "bg-accent text-accent-foreground"
