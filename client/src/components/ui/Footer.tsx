@@ -1,13 +1,10 @@
-
-import { Link } from "wouter";
-import { Heart, ArrowUp, Play, Pause } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useState, useRef } from "react";
+import Link from "next/link";
+import { Button } from "./button";
+import { Play, Pause, Heart } from "lucide-react";
 
 const quotes = [
-  { text: "In the midst of chaos, there is also opportunity", author: "Sun Tzu" },
-  { text: "Where there is dharma, there is victory", author: "Mahabharata" },
+  { text: "In every walk with nature one receives far more than he seeks", author: "John Muir" },
   { text: "The journey of a thousand miles begins with one step", author: "Lao Tzu" }
 ];
 
@@ -30,15 +27,15 @@ const Footer = () => {
 
   return (
     <footer className="relative mt-auto border-t bg-background">
-      <div className="container px-4 py-6">
+      <div className="container px-4 py-8">
         {/* Quote Section */}
-        <div className="mb-6 text-center">
-          <p className="text-lg italic text-muted-foreground">"{randomQuote.text}"</p>
-          <p className="mt-2 text-sm">- {randomQuote.author}</p>
+        <div className="mb-8 text-center">
+          <p className="text-xl italic text-muted-foreground">"{randomQuote.text}"</p>
+          <p className="mt-2 text-sm font-medium">- {randomQuote.author}</p>
         </div>
 
         {/* Music Player */}
-        <div className="flex justify-center items-center mb-6">
+        <div className="flex justify-center items-center mb-8">
           <audio
             ref={audioRef}
             src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
@@ -47,39 +44,28 @@ const Footer = () => {
             variant="outline"
             size="icon"
             onClick={togglePlay}
-            className="w-12 h-12 rounded-full"
+            className="w-12 h-12 rounded-full hover:bg-accent"
           >
             {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
           </Button>
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <h3 className="mb-4 text-lg font-semibold">Navigation</h3>
-            <ul className="space-y-2">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="mb-4 text-lg font-semibold">Newsletter</h3>
-            <div className="flex gap-2">
-              <Input placeholder="Enter your email" />
-              <Button>Subscribe</Button>
-            </div>
+        <div className="flex justify-center mb-8">
+          <div className="space-x-6">
+            <Link href="/" className="hover:text-primary">Home</Link>
+            <Link href="/about" className="hover:text-primary">About</Link>
+            <Link href="/contact" className="hover:text-primary">Contact</Link>
           </div>
         </div>
 
         {/* Cultural Imagery */}
-        <div className="mt-8 border-t pt-6">
+        <div className="mt-8 border-t pt-8">
           <div className="flex justify-center">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Mandala_01.svg"
-              alt="Indian Mandala"
-              className="h-24 opacity-60"
+              src="/indian-culture.png"
+              alt="Indian Cultural Art"
+              className="h-32 w-auto opacity-80"
             />
           </div>
         </div>
