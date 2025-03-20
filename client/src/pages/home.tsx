@@ -1,132 +1,168 @@
 
-import React from "react";
-import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-const testimonials = [
-  { id: 1, name: "John", avatar: "https://i.pravatar.cc/150?u=1" },
-  { id: 2, name: "Sarah", avatar: "https://i.pravatar.cc/150?u=2" },
-  { id: 3, name: "Mike", avatar: "https://i.pravatar.cc/150?u=3" },
-];
-
-const skills = ["React", "Node.js", "TypeScript", "UI/UX", "Next.js", "Tailwind"];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
 const HomePage = () => {
+  const testimonials = [
+    { id: 1, name: "John Smith", avatar: "https://i.pravatar.cc/150?img=1" },
+    { id: 2, name: "Sarah Johnson", avatar: "https://i.pravatar.cc/150?img=2" },
+    { id: 3, name: "Mike Brown", avatar: "https://i.pravatar.cc/150?img=3" },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <div className="pb-16">
+    <div className="flex-1">
       {/* Hero Section */}
-      <section className="min-h-[90vh] relative flex items-center py-20">
-        <div className="absolute inset-0 overflow-hidden">
-          {skills.map((skill, index) => (
-            <div
-              key={index}
-              className="absolute animate-float"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${index * 0.5}s`,
-                opacity: 0.1,
-              }}
-            >
-              {skill}
-            </div>
-          ))}
+      <section className="min-h-[90vh] relative flex items-center bg-background">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background to-background/0" />
         </div>
 
-        <div className="container max-w-4xl mx-auto px-4 md:px-6 relative z-10">
-          <motion.div 
-            className="text-center"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1 
-              className="text-4xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
-              variants={itemVariants}
-            >
-              Hello, I'm John Doe
-            </motion.h1>
-
-            <motion.p 
-              className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto"
-              variants={itemVariants}
-            >
-              Full-stack developer specializing in building exceptional digital 
-              experiences that are accessible, human-centered, and business-focused.
-            </motion.p>
-
+        <div className="container max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
             <motion.div 
-              className="flex flex-wrap gap-4 justify-center"
-              variants={itemVariants}
+              className="lg:w-1/2 space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <Button size="lg" asChild>
-                <Link href="/projects">
-                  <span>View My Work</span>
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/contact">
-                  <span>Contact Me</span>
-                </Link>
-              </Button>
-            </motion.div>
+              <motion.span 
+                className="inline-block text-primary font-medium"
+                variants={itemVariants}
+              >
+                Hello, I'm John Doe
+              </motion.span>
 
-            <motion.div 
-              className="flex items-center gap-3 pt-4 justify-center"
-              variants={itemVariants}
-            >
-              <div className="flex -space-x-2">
-                {testimonials.map((testimonial) => (
-                  <Avatar key={testimonial.id} className="border-2 border-background w-8 h-8">
-                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                ))}
-              </div>
-              <div className="flex items-center">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              <motion.h1 
+                className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
+                variants={itemVariants}
+              >
+                Creating <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">digital experiences</span> that matter
+              </motion.h1>
+
+              <motion.p 
+                className="text-xl text-muted-foreground max-w-xl"
+                variants={itemVariants}
+              >
+                Full-stack developer specializing in building exceptional digital 
+                experiences that are accessible, human-centered, and business-focused.
+              </motion.p>
+
+              <motion.div 
+                className="flex flex-wrap gap-4 pt-2"
+                variants={itemVariants}
+              >
+                <Button size="lg" asChild>
+                  <Link href="/projects">
+                    View My Work
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/contact">
+                    Contact Me
+                  </Link>
+                </Button>
+              </motion.div>
+
+              <motion.div 
+                className="flex items-center gap-3 pt-4"
+                variants={itemVariants}
+              >
+                <div className="flex -space-x-2">
+                  {testimonials.map((testimonial) => (
+                    <Avatar key={testimonial.id} className="border-2 border-background w-8 h-8">
+                      <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                      <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
                   ))}
                 </div>
-                <span className="ml-2 text-sm text-muted-foreground">
-                  from <span className="font-medium text-foreground">20+ clients</span>
-                </span>
+                <div className="flex items-center">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <span className="ml-2 text-sm text-muted-foreground">
+                    from <span className="font-medium text-foreground">20+ clients</span>
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              className="lg:w-1/2 relative"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-primary/20 blur-3xl"></div>
+                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-xl"></div>
+                <div className="absolute bottom-0 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"></div>
+
+                <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border/40 shadow-xl bg-background/90 backdrop-blur-sm p-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    alt="John Doe" 
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+
+                  <Badge className="absolute top-6 -left-2 shadow-lg animate-float-slow" variant="secondary">
+                    React
+                  </Badge>
+                  <Badge className="absolute top-20 -right-2 shadow-lg animate-float-slow animation-delay-300" variant="secondary">
+                    Node.js
+                  </Badge>
+                  <Badge className="absolute bottom-16 -left-2 shadow-lg animate-float-slow animation-delay-700" variant="secondary">
+                    TypeScript
+                  </Badge>
+                  <Badge className="absolute bottom-6 right-4 shadow-lg animate-float-slow animation-delay-500" variant="secondary">
+                    UI/UX
+                  </Badge>
+                </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured Projects Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="container max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight mb-4">Featured Projects</h2>
-            <p className="text-lg text-muted-foreground">
-              Here are some of my recent works that showcase my skills and expertise.
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-4xl font-bold tracking-tight mb-4">
+              Featured Projects
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              A selection of my recent work. Each project represents a unique challenge and solution.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((project) => (
@@ -163,42 +199,6 @@ const HomePage = () => {
                     </Link>
                   </Button>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/projects">
-                View All Projects
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section className="py-20">
-        <div className="container max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight mb-4">My Skills</h2>
-            <p className="text-lg text-muted-foreground">
-              Technologies and tools I use to bring projects to life
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill}
-                className="bg-card hover:bg-card/80 border rounded-lg p-6 text-center transition-colors"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="text-xl font-semibold">{skill}</div>
               </motion.div>
             ))}
           </div>
