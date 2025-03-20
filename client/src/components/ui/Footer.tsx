@@ -1,5 +1,6 @@
+
 import { useState, useRef } from "react";
-import Link from "next/link";
+import { Link } from "wouter";
 import { Button } from "./button";
 import { Play, Pause, Heart } from "lucide-react";
 
@@ -11,6 +12,7 @@ const quotes = [
 const Footer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -22,8 +24,6 @@ const Footer = () => {
       setIsPlaying(!isPlaying);
     }
   };
-
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return (
     <footer className="relative mt-auto border-t bg-background">
@@ -39,6 +39,7 @@ const Footer = () => {
           <audio
             ref={audioRef}
             src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            onEnded={() => setIsPlaying(false)}
           />
           <Button
             variant="outline"
@@ -68,12 +69,6 @@ const Footer = () => {
               className="h-32 w-auto opacity-80"
             />
           </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-          <p>Made with <Heart className="inline h-4 w-4 text-red-500" /> using React & Tailwind</p>
-          <p className="mt-2">© {new Date().getFullYear()} All rights reserved</p>
         </div>
       </div>
     </footer>
