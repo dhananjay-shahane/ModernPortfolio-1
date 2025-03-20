@@ -11,7 +11,7 @@ const quotes = [
   { text: "The journey of a thousand miles begins with one step", author: "Lao Tzu" }
 ];
 
-export const Footer = () => {
+const Footer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -93,3 +93,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;
