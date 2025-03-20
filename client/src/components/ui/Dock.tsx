@@ -31,6 +31,7 @@ export function Dock() {
             <Button
               variant="ghost"
               size="icon"
+              onClick={scrollToTop}
               className={cn(
                 "rounded-full transition-all",
                 location === path && "bg-accent text-accent-foreground"
