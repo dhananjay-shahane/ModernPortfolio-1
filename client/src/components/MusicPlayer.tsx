@@ -1,5 +1,5 @@
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Play, Pause, SkipBack, SkipForward, Music2 } from "lucide-react";
 import {
@@ -10,16 +10,50 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const songs = [
-  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-];
+interface Track {
+  url: string;
+  name: string;
+  imageUrl: string;
+}
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [tracks, setTracks] = useState<Track[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Initialize Spotify and fetch tracks
+    const fetchTracks = async () => {
+      try {
+        const response = await fetch('/api/spotify/tracks');
+        const data = await response.json();
+        setTracks(data);
+      } catch (error) {
+        console.error('Failed to fetch tracks:', error);
+        // Fallback to default tracks if API fails
+        setTracks([
+          {
+            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+            name: "SoundHelix Song 1",
+            imageUrl: "https://picsum.photos/200/200"
+          },
+          {
+            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+            name: "SoundHelix Song 2",
+            imageUrl: "https://picsum.photos/200/200"
+          },
+          {
+            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+            name: "SoundHelix Song 3",
+            imageUrl: "https://picsum.photos/200/200"
+          }
+        ]);
+      }
+    };
+
+    fetchTracks();
+  }, []);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -33,18 +67,20 @@ const MusicPlayer = () => {
   };
 
   const playNext = () => {
-    setCurrentSongIndex((prev) => (prev + 1) % songs.length);
+    setCurrentSongIndex((prev) => (prev + 1) % tracks.length);
     if (isPlaying && audioRef.current) {
       audioRef.current.play();
     }
   };
 
   const playPrevious = () => {
-    setCurrentSongIndex((prev) => (prev - 1 + songs.length) % songs.length);
+    setCurrentSongIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
     if (isPlaying && audioRef.current) {
       audioRef.current.play();
     }
   };
+
+  const currentTrack = tracks[currentSongIndex];
 
   return (
     <Dialog>
@@ -61,36 +97,48 @@ const MusicPlayer = () => {
         <DialogHeader>
           <DialogTitle>Music Player</DialogTitle>
         </DialogHeader>
-        <div className="flex items-center justify-center gap-4 py-6">
+        <div className="flex flex-col items-center gap-4 py-6">
+          {currentTrack && (
+            <>
+              <img 
+                src={currentTrack.imageUrl} 
+                alt={currentTrack.name}
+                className="w-48 h-48 rounded-lg shadow-lg mb-4"
+              />
+              <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+            </>
+          )}
           <audio
             ref={audioRef}
-            src={songs[currentSongIndex]}
+            src={currentTrack?.url}
             onEnded={playNext}
           />
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={playPrevious}
-            className="rounded-full h-12 w-12"
-          >
-            <SkipBack className="h-6 w-6" />
-          </Button>
-          <Button
-            variant="default"
-            size="icon"
-            onClick={togglePlay}
-            className="rounded-full h-16 w-16"
-          >
-            {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8" />}
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={playNext}
-            className="rounded-full h-12 w-12"
-          >
-            <SkipForward className="h-6 w-6" />
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={playPrevious}
+              className="rounded-full h-12 w-12"
+            >
+              <SkipBack className="h-6 w-6" />
+            </Button>
+            <Button
+              variant="default"
+              size="icon"
+              onClick={togglePlay}
+              className="rounded-full h-16 w-16"
+            >
+              {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8" />}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={playNext}
+              className="rounded-full h-12 w-12"
+            >
+              <SkipForward className="h-6 w-6" />
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
