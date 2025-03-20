@@ -1,116 +1,89 @@
 import { motion } from "framer-motion";
-import SectionHeading from "./ui/section-heading";
-import ProgressSkill from "./ui/progress-skill";
-import { Laptop, Server, Settings2 } from "lucide-react";
 import { frontendSkills, backendSkills, toolsSkills } from "../lib/data";
-
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { ChevronRight, Star } from "lucide-react";
 const SkillsSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const skillCardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({ 
-      opacity: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.6, 
-        ease: "easeOut",
-        delay: 0.1 * i
-      }
-    })
-  };
-
   return (
-    <section id="skills" className="py-20 bg-dark-light">
-      <div className="container mx-auto px-6">
-        <SectionHeading title="Skills" />
-        
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
+    <section className="py-20">
+      <div className="container max-w-7xl mx-auto px-4 md:px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">
+            My Skills
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+            A comprehensive overview of my technical expertise and the
+            technologies I specialize in.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Frontend Skills */}
-          <motion.div 
-            className="bg-dark p-8 rounded-lg shadow-lg"
-            custom={0}
-            variants={skillCardVariants}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="bg-card/50 backdrop-blur-sm border rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all"
           >
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-              <Laptop className="h-6 w-6 text-primary mr-2" />
-              Frontend Development
-            </h3>
-            
-            <div className="space-y-4">
+            <div className="flex items-center mb-8">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/80 to-primary/30 text-primary-foreground flex items-center justify-center mr-4 shadow-sm">
+                <span className="font-bold text-xl">F</span>
+              </div>
+              <h3 className="text-2xl font-semibold">Frontend Development</h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {frontendSkills.map((skill, index) => (
-                <ProgressSkill 
+                <motion.div
                   key={index}
-                  name={skill.name}
-                  percentage={skill.percentage}
-                  color="primary"
-                  delay={index * 0.1}
-                />
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-xs font-medium text-primary">
+                          {index + 1}
+                        </span>
+                      </div>
+                      <span className="font-medium">{skill.name}</span>
+                    </div>
+                    <span className="text-sm text-muted-foreground font-medium">
+                      {skill.percentage}%
+                    </span>
+                  </div>
+                  <div className="h-2.5 bg-muted/70 rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-primary/80 to-primary/50 rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.percentage}%` }}
+                      transition={{ duration: 1, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
-          
-          {/* Backend Skills */}
-          <motion.div 
-            className="bg-dark p-8 rounded-lg shadow-lg"
-            custom={1}
-            variants={skillCardVariants}
-          >
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-              <Server className="h-6 w-6 text-accent mr-2" />
-              Backend Development
-            </h3>
-            
-            <div className="space-y-4">
-              {backendSkills.map((skill, index) => (
-                <ProgressSkill 
-                  key={index}
-                  name={skill.name}
-                  percentage={skill.percentage}
-                  color="accent"
-                  delay={index * 0.1}
-                />
-              ))}
-            </div>
-          </motion.div>
-          
-          {/* Tools & Others */}
-          <motion.div 
-            className="bg-dark p-8 rounded-lg shadow-lg"
-            custom={2}
-            variants={skillCardVariants}
-          >
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-              <Settings2 className="h-6 w-6 text-secondary mr-2" />
-              Tools & Other Skills
-            </h3>
-            
-            <div className="space-y-4">
-              {toolsSkills.map((skill, index) => (
-                <ProgressSkill 
-                  key={index}
-                  name={skill.name}
-                  percentage={skill.percentage}
-                  color="secondary"
-                  delay={index * 0.1}
-                />
-              ))}
-            </div>
-          </motion.div>
+        </div>
+
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <Button size="lg" className="px-8" asChild>
+            <Link href="/about">
+              <span>View All Skills</span>
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

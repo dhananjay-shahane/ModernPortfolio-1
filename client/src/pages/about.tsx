@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 
 import { FileText, User, Brain } from "lucide-react";
+import CtaSection from "@/components/CtaSection";
 
 const AboutPage = () => {
   const experiences = [
@@ -55,17 +56,17 @@ const AboutPage = () => {
   ];
 
   return (
-    <Beam className="pt-24 pb-16">
+    <Beam className="pb-16">
       {/* Hero Section */}
       <section className="py-12">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">About Me</h1>
             <p className="text-xl text-muted-foreground mb-8">
               Get to know more about me, my background, and what drives me as a developer.
             </p>
@@ -75,7 +76,7 @@ const AboutPage = () => {
 
       {/* Personal Info Section */}
       <section className="py-12 bg-muted/30">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -145,7 +146,7 @@ const AboutPage = () => {
 
       {/* Experience Section */}
       <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -153,7 +154,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Work Experience</h2>
+           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">Work Experience</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               A timeline of my professional journey and the companies I&apos;ve had the pleasure to work with.
             </p>
@@ -202,85 +203,9 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Resume Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
-            className="text-center mb-16 flex flex-col items-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <FileText className="w-8 h-8 text-primary" />
-            </div>
-            <h2 className="text-3xl font-bold mb-4">My Resume</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-              Download my complete resume to learn more about my experience and qualifications.
-            </p>
-            <button className="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors">
-              Download Resume
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Animated Beam AI Technology Section */}
-      <section className="py-16 bg-muted/30 relative overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold mb-4">AI Technology Integration</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Bridging human expertise with artificial intelligence for innovative solutions.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <motion.div
-              className="flex flex-col items-center p-6 bg-card rounded-lg border"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-4">
-                <User className="w-8 h-8 text-blue-500" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Human Expertise</h3>
-              <p className="text-center text-muted-foreground">
-                Years of experience in software development and problem-solving capabilities.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="flex flex-col items-center p-6 bg-card rounded-lg border"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center mb-4">
-                <Brain className="w-8 h-8 text-purple-500" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">AI Integration</h3>
-              <p className="text-center text-muted-foreground">
-                Leveraging cutting-edge AI technologies to enhance development workflows.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Education Section */}
       <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -288,7 +213,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Education</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">Education</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               My academic background and qualifications that shaped my technical knowledge.
             </p>
@@ -332,7 +257,7 @@ const AboutPage = () => {
 
       {/* Certifications Section */}
       <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -340,7 +265,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Certifications & Awards</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">Certifications & Awards</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Additional qualifications and recognitions I&apos;ve earned throughout my career.
             </p>
@@ -419,7 +344,7 @@ const AboutPage = () => {
 
       {/* Personal Interests */}
       <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -427,7 +352,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Beyond Coding</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">Beyond Coding</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               When I&apos;m not coding, you can find me exploring these interests and hobbies.
             </p>
@@ -476,25 +401,8 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold mb-4">Let&apos;s Connect</h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Interested in working together or have a question? I&apos;d love to hear from you.
-            </p>
-            <Button size="lg" asChild>
-              <Link href="/contact">Contact Me</Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <CtaSection/>
+
     </Beam>
   );
 };

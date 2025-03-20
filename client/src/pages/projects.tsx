@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
 import { Filter, Search, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { projects } from "@/lib/data";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
+import CtaSection from "@/components/CtaSection";
 
 
 /**
@@ -82,10 +82,10 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="pt-24 pb-16">
+    <div className="pb-16">
       {/* Hero Section */}
       <section className="py-12">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div
             className="text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +102,7 @@ const ProjectsPage = () => {
 
       {/* Filter and Search Section */}
       <section className="py-4">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div
             className="rounded-lg border bg-card p-6 shadow-sm"
             initial={{ opacity: 0, y: 20 }}
@@ -146,7 +146,7 @@ const ProjectsPage = () => {
 
       {/* Projects Grid */}
       <section className="py-12">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={containerVariants}
@@ -238,50 +238,9 @@ const ProjectsPage = () => {
             )}
           </motion.div>
         </div>
-        {selectedProject && (
-          <Dialog open={!!selectedProject} onOpenChange={setSelectedProject}>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>{selectedProject.title}</DialogTitle>
-                <DialogClose />
-              </DialogHeader>
-              <div className="p-4">
-                  <img src={selectedProject.imageUrl} alt={selectedProject.title} className="w-full rounded-lg" />
-                  <p className="mt-4 text-lg">{selectedProject.description}</p>
-                  <ul className="mt-4 list-disc">
-                      {selectedProject.technologies.map((tech,i) => <li key={i}>{tech.name}</li>)}
-                  </ul>
-                  {selectedProject.demoUrl && (<a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer">Demo</a>)}
-              </div>
-            </DialogContent>
-          </Dialog>
-        )}
       </section>
-
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            className="rounded-2xl bg-muted p-8 md:p-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold mb-4">Have a project in mind?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              I&apos;m always open to new opportunities and exciting projects.
-              Let&apos;s discuss how we can work together to bring your ideas to life.
-            </p>
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                Get In Touch
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <CtaSection/>
     </div>
   );
 };

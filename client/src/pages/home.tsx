@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/carousel";
 import { frontendSkills, backendSkills, projects } from "@/lib/data";
 import { useState } from 'react';
+import CtaSection from "@/components/CtaSection";
+import SkillsSection from "@/components/SkillsSection";
 
 /**
  * Home page component
@@ -71,6 +73,14 @@ const HomePage = () => {
       avatar: "https://randomuser.me/api/portraits/men/67.jpg",
       content: "Dhananjay's ability to translate complex designs into smooth, interactive web experiences exceeded our expectations.",
       rating: 5
+    },
+    {
+      id: 4,
+      name: "Rahul Verma",
+      role: "Founder, DesignFirst",
+      avatar: "https://randomuser.me/api/portraits/men/67.jpg",
+      content: "Dhananjay's ability to translate complex designs into smooth, interactive web experiences exceeded our expectations.",
+      rating: 3
     }
   ];
 
@@ -99,7 +109,7 @@ const HomePage = () => {
           ))}
         </div>
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <motion.div 
               className="lg:w-1/2 space-y-6"
@@ -183,7 +193,7 @@ const HomePage = () => {
                 <div className="absolute bottom-0 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"></div>
 
                 {/* Profile image with glow effect */}
-                <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-border/40 shadow-xl bg-background/90 backdrop-blur-sm p-3">
+                <div className="relative z-10 w-full h-full rounded-2xlwor overflow-hidden border border-border/40 shadow-xl bg-background/90 backdrop-blur-sm p-3">
                   <img 
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt="John Doe" 
@@ -212,10 +222,10 @@ const HomePage = () => {
 
       {/* Featured Projects Section */}
       <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight mb-2">Featured Projects</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4  bg-clip-text">Featured Projects</h2>
               <p className="text-muted-foreground max-w-2xl">
                 A selection of my recent work. Each project was carefully crafted to solve specific challenges.
               </p>
@@ -283,129 +293,7 @@ const HomePage = () => {
       </section>
 
       {/* Skills Overview */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight mb-2">My Skills</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive overview of my technical expertise and the technologies I specialize in.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            {/* Frontend Skills */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="bg-card/50 backdrop-blur-sm border rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all"
-            >
-              <div className="flex items-center mb-8">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/80 to-primary/30 text-primary-foreground flex items-center justify-center mr-4 shadow-sm">
-                  <span className="font-bold text-xl">F</span>
-                </div>
-                <h3 className="text-2xl font-semibold">Frontend Development</h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {frontendSkills.map((skill, index) => (
-                  <motion.div 
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="group"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors">
-                          <span className="text-xs font-medium text-primary">{index + 1}</span>
-                        </div>
-                        <span className="font-medium">{skill.name}</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground font-medium">{skill.percentage}%</span>
-                    </div>
-                    <div className="h-2.5 bg-muted/70 rounded-full overflow-hidden">
-                      <motion.div 
-                        className="h-full bg-gradient-to-r from-primary/80 to-primary/50 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.percentage}%` }}
-                        transition={{ duration: 1, delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Backend Skills */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="bg-card/50 backdrop-blur-sm border rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all"
-            >
-              <div className="flex items-center mb-8">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/80 to-purple-500/30 text-white flex items-center justify-center mr-4 shadow-sm">
-                  <span className="font-bold text-xl">B</span>
-                </div>
-                <h3 className="text-2xl font-semibold">Backend Development</h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {backendSkills.map((skill, index) => (
-                  <motion.div 
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="group"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center mr-3 group-hover:bg-purple-500/20 transition-colors">
-                          <span className="text-xs font-medium text-purple-500">{index + 1}</span>
-                        </div>
-                        <span className="font-medium">{skill.name}</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground font-medium">{skill.percentage}%</span>
-                    </div>
-                    <div className="h-2.5 bg-muted/70 rounded-full overflow-hidden">
-                      <motion.div 
-                        className="h-full bg-gradient-to-r from-purple-500/80 to-purple-500/50 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.percentage}%` }}
-                        transition={{ duration: 1, delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div 
-            className="mt-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <Button size="lg" className="px-8" asChild>
-              <Link href="/about">
-                <span>View All Skills</span>
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <SkillsSection/>
 
       {/* Testimonials Section */}
       <section className="py-20 relative overflow-hidden">
@@ -436,7 +324,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          <Carousel className="w-full max-w-6xl mx-auto">
+          <Carousel className="w-full max-w-7xl mx-auto">
             <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
@@ -482,52 +370,10 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 backdrop-blur-sm overflow-hidden p-8 md:p-12">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
-
-            <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
-              <div className="max-w-2xl">
-                <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to bring your ideas to life?</h2>
-                <p className="text-lg text-muted-foreground">
-                  I'm available for freelance projects and full-time opportunities. 
-                  Let's work together to create something amazing.
-                </p>
-              </div>
-              <Button size="lg" className="min-w-[150px]" asChild>
-                <Link href="/contact">
-                  <span>Get in Touch</span>
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          isOpen={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
+      <CtaSection/>
     </div>
   );
 };
 
-const ProjectModal = ({ project, isOpen, onClose }) => {
-  if (!isOpen) return null;
-  return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-xl font-bold mb-4">{project.title}</h2>
-        <p>{project.description}</p>
-        <button onClick={onClose}>Close</button>
-      </div>
-    </div>
-  );
-};
 
 export default HomePage;

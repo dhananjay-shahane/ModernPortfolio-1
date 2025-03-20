@@ -98,10 +98,10 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pt-24 pb-16">
+    <div className="pb-16">
       {/* Hero Section */}
       <section className="py-12">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
@@ -118,7 +118,7 @@ const ContactPage = () => {
 
       {/* Contact Form & Info */}
       <section className="py-12">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <motion.div
@@ -283,7 +283,7 @@ const ContactPage = () => {
 
       {/* FAQ Section */}
       <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6">
           <motion.div 
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}

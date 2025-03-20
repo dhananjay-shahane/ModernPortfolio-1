@@ -18,7 +18,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 
       <AnimatePresence mode="wait">
         <motion.main 
-          className="flex-grow w-full pt-12 sm:pt-14 flex flex-col"
+          className="flex-grow w-full flex flex-col"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

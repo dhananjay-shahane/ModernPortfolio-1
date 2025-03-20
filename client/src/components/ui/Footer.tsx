@@ -21,19 +21,10 @@ const Footer = () => {
   
   return (
     <footer className="bg-muted/30 border-t relative">
-      {/* Decorative Footer Image */}
-      <div className="absolute bottom-0 left-0 right-0 w-full">
-        <img 
-          src="../../attached_assets/footer.jpg" 
-          alt="Decorative footer" 
-          className="w-full h-auto object-cover"
-          style={{ maxHeight: '120px' }}
-        />
-      </div>
       
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+      <div className="container max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Brand Section */}
           <div className="space-y-4">
             <Link href="/">
@@ -56,72 +47,13 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-base font-medium">Quick Links</h3>
-            <ul className="space-y-2">
-              {[
-                { href: "/", label: "Home" },
-                { href: "/about", label: "About" },
-                { href: "/projects", label: "Projects" },
-                { href: "/contact", label: "Contact" }
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href}>
-                    <span className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-                      {link.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Contact Information */}
-          <div className="space-y-4">
-            <h3 className="text-base font-medium">Contact</h3>
-            <ul className="space-y-2">
-              <li className="text-muted-foreground">San Francisco, California</li>
-              <li>
-                <a 
-                  href="mailto:john@example.com" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  john@example.com
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="tel:+15551234567" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  +1 (555) 123-4567
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h3 className="text-base font-medium">Stay Updated</h3>
-            <p className="text-muted-foreground">
-              Subscribe to my newsletter for the latest projects and updates.
-            </p>
-            <div className="flex">
-              <Input 
-                type="email" 
-                placeholder="Your email" 
-                className="rounded-r-none focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
-              <Button className="rounded-l-none">Subscribe</Button>
-            </div>
-          </div>
+
         </div>
       </div>
       
       {/* Bottom Footer */}
       <div className="border-t">
-        <div className="container mx-auto px-4 md:px-6 py-6">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left text-sm text-muted-foreground">
               © {currentYear} John Doe. All rights reserved.
@@ -145,6 +77,16 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {/* Decorative Footer Image */}
+      {/* <div className="conatiner max-w-7xl mx-auto w-full">
+        <Image 
+          src="" 
+          alt="Decorative footer" 
+          className="w-full h-auto object-cover"
+          style={{ maxHeight: '200px' }}
+        />
+      </div> */}
     </footer>
   );
 };
