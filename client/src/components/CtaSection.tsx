@@ -4,7 +4,7 @@ const CtaSection = () => {
   return (
     <section className="py-20">
       <div className="container max-w-7xl mx-auto px-4 md:px-6">
-        <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 backdrop-blur-sm overflow-hidden p-8 md:p-12">
+        <div className="relative border-4 border-black rounded-none bg-card overflow-hidden p-8 md:p-12" style={{boxShadow: '8px 8px 0 rgba(0,0,0,0.8)'}}>
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>

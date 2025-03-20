@@ -89,7 +89,12 @@ const HomePage = () => {
       {/* Hero Section - with animated gradient background and particles */}
       <section className="relative min-h-[90vh] flex items-center py-16 overflow-hidden">
         {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient-slow"></div>
+        <div className="absolute inset-0 bg-[#1a1a1a] bg-opacity-80 backdrop-blur-sm"></div>
+        <div className="absolute inset-0" style={{ 
+          backgroundImage: `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAIUlEQVQoU2P8////fwYkwMjIyIjMZmLADUYVjHgFIHUAAKuXJHy1mzeUAAAAAElFTkSuQmCC")`,
+          backgroundRepeat: 'repeat',
+          opacity: 0.1
+        }}></div>
 
         {/* Animated particles (decorative elements) */}
         <div className="absolute inset-0 overflow-hidden">
