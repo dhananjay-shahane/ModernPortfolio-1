@@ -2,6 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dock } from "@/components/ui/Dock";
 import Footer from "@/components/ui/Footer";
+import MusicPlayer from "@/components/MusicPlayer";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         </motion.main>
       </AnimatePresence>
 
+      <MusicPlayer />
       <Footer />
     </div>
   );
