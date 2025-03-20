@@ -1,19 +1,16 @@
-
 import { useState, useRef } from "react";
-import { Link } from "wouter";
+import Link from "next/link";
 import { Button } from "./button";
-import { Play, Pause, Heart, Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
+import { Play, Pause, Heart } from "lucide-react";
 
 const quotes = [
-  { text: "The journey of a thousand miles begins with one step", author: "Lao Tzu" },
-  { text: "Where there is love there is life", author: "Mahatma Gandhi" },
-  { text: "In a gentle way, you can shake the world", author: "Mahatma Gandhi" }
+  { text: "In every walk with nature one receives far more than he seeks", author: "John Muir" },
+  { text: "The journey of a thousand miles begins with one step", author: "Lao Tzu" }
 ];
 
 const Footer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -25,6 +22,8 @@ const Footer = () => {
       setIsPlaying(!isPlaying);
     }
   };
+
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return (
     <footer className="relative mt-auto border-t bg-background">
@@ -40,7 +39,6 @@ const Footer = () => {
           <audio
             ref={audioRef}
             src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-            onEnded={() => setIsPlaying(false)}
           />
           <Button
             variant="outline"
@@ -53,47 +51,16 @@ const Footer = () => {
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <div className="flex flex-col space-y-2">
-              <Link href="/" className="hover:text-primary">Home</Link>
-              <Link href="/about" className="hover:text-primary">About</Link>
-              <Link href="/contact" className="hover:text-primary">Contact</Link>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <h3 className="font-semibold mb-4">Connect With Us</h3>
-            <div className="flex justify-center space-x-4">
-              <Button variant="ghost" size="icon" className="hover:text-primary">
-                <Facebook className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover:text-primary">
-                <Twitter className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover:text-primary">
-                <Instagram className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover:text-primary">
-                <Linkedin className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-
-          <div className="text-center md:text-right">
-            <h3 className="font-semibold mb-4">Resources</h3>
-            <div className="flex flex-col space-y-2">
-              <Link href="/blog" className="hover:text-primary">Blog</Link>
-              <Link href="/gallery" className="hover:text-primary">Gallery</Link>
-              <Link href="/events" className="hover:text-primary">Events</Link>
-              <Link href="/heritage" className="hover:text-primary">Indian Heritage</Link>
-            </div>
+        <div className="flex justify-center mb-8">
+          <div className="space-x-6">
+            <Link href="/" className="hover:text-primary">Home</Link>
+            <Link href="/about" className="hover:text-primary">About</Link>
+            <Link href="/contact" className="hover:text-primary">Contact</Link>
           </div>
         </div>
 
         {/* Cultural Imagery */}
-        <div className="border-t pt-8">
+        <div className="mt-8 border-t pt-8">
           <div className="flex justify-center">
             <img
               src="/indian-culture.png"
@@ -104,16 +71,9 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-4 border-t text-center bg-accent/5 rounded-lg p-6">
-          <p className="flex items-center justify-center text-sm font-medium">
-            Made with <Heart className="inline h-4 w-4 mx-1 text-red-500 animate-pulse" /> in India
-          </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Your Company Name. All rights reserved.
-          </p>
-          <p className="mt-2 text-xs font-medium bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">
-            Celebrating Indian Culture and Heritage
-          </p>
+        <div className="mt-8 text-center text-sm text-muted-foreground">
+          <p>Made with <Heart className="inline h-4 w-4 text-red-500" /> using React & Tailwind</p>
+          <p className="mt-2">© {new Date().getFullYear()} All rights reserved</p>
         </div>
       </div>
     </footer>
