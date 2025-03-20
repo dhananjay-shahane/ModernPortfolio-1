@@ -1,7 +1,14 @@
 
 import { useState, useRef } from "react";
 import { Button } from "./ui/button";
-import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Music2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const songs = [
   "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
@@ -40,37 +47,53 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="fixed right-4 top-20 z-50 flex items-center gap-2 rounded-full bg-background/80 p-2 shadow-lg backdrop-blur-lg border">
-      <audio
-        ref={audioRef}
-        src={songs[currentSongIndex]}
-        onEnded={playNext}
-      />
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={playPrevious}
-        className="rounded-full w-8 h-8"
-      >
-        <SkipBack className="h-4 w-4" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={togglePlay}
-        className="rounded-full w-10 h-10"
-      >
-        {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={playNext}
-        className="rounded-full w-8 h-8"
-      >
-        <SkipForward className="h-4 w-4" />
-      </Button>
-    </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          size="icon"
+          className="fixed right-4 top-20 z-50 h-10 w-10 rounded-full bg-background/80 shadow-lg backdrop-blur-lg"
+        >
+          <Music2 className="h-5 w-5" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Music Player</DialogTitle>
+        </DialogHeader>
+        <div className="flex items-center justify-center gap-4 py-6">
+          <audio
+            ref={audioRef}
+            src={songs[currentSongIndex]}
+            onEnded={playNext}
+          />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={playPrevious}
+            className="rounded-full h-12 w-12"
+          >
+            <SkipBack className="h-6 w-6" />
+          </Button>
+          <Button
+            variant="default"
+            size="icon"
+            onClick={togglePlay}
+            className="rounded-full h-16 w-16"
+          >
+            {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8" />}
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={playNext}
+            className="rounded-full h-12 w-12"
+          >
+            <SkipForward className="h-6 w-6" />
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
