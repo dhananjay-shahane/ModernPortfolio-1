@@ -82,14 +82,12 @@ const Footer = () => {
           </div>
 
           <div className="text-center md:text-right">
-            <h3 className="font-semibold mb-4">Contact Info</h3>
+            <h3 className="font-semibold mb-4">Resources</h3>
             <div className="flex flex-col space-y-2">
-              <p className="flex items-center justify-center md:justify-end">
-                <Mail className="h-4 w-4 mr-2" />
-                contact@example.com
-              </p>
-              <p>123 Main Street</p>
-              <p>New Delhi, India</p>
+              <Link href="/blog" className="hover:text-primary">Blog</Link>
+              <Link href="/gallery" className="hover:text-primary">Gallery</Link>
+              <Link href="/events" className="hover:text-primary">Events</Link>
+              <Link href="/heritage" className="hover:text-primary">Indian Heritage</Link>
             </div>
           </div>
         </div>
@@ -106,14 +104,14 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-4 border-t text-center">
-          <p className="flex items-center justify-center text-sm text-muted-foreground">
-            Made with <Heart className="inline h-4 w-4 mx-1 text-red-500" /> in India
+        <div className="mt-8 pt-4 border-t text-center bg-accent/5 rounded-lg p-6">
+          <p className="flex items-center justify-center text-sm font-medium">
+            Made with <Heart className="inline h-4 w-4 mx-1 text-red-500 animate-pulse" /> in India
           </p>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground">
             © {new Date().getFullYear()} Your Company Name. All rights reserved.
           </p>
-          <p className="mt-1 text-xs text-muted-foreground">
+          <p className="mt-2 text-xs font-medium bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">
             Celebrating Indian Culture and Heritage
           </p>
         </div>
