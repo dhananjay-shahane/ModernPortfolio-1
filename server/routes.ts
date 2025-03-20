@@ -3,6 +3,33 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
 import { ZodError } from "zod";
+import express from 'express';
+import fetch from 'node-fetch';
+
+const router = express.Router();
+
+router.get('/api/spotify/tracks', async (req, res) => {
+  try {
+    const response = await fetch('https://api.spotify.com/v1/me/tracks', {
+      headers: {
+        'Authorization': `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch tracks');
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching tracks:', error);
+    res.status(500).json({ error: 'Failed to fetch tracks' });
+  }
+});
+
+export default router;
+
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes
@@ -38,49 +65,3 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   return httpServer;
 }
-import express from 'express';
-import fetch from 'node-fetch';
-
-export const router = express.Router();
-
-// Spotify API endpoints
-router.get('/api/spotify/tracks', async (req, res) => {
-  try {
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
-    // Get access token
-    const authResponse = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64')
-      },
-      body: 'grant_type=client_credentials'
-    });
-
-    const authData = await authResponse.json();
-
-    // Get tracks from a playlist (replace with your playlist ID)
-    const playlistId = '37i9dQZF1DXcBWIGoYBM5M'; // Example: Top 50 Global playlist
-    const tracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=10`, {
-      headers: {
-        'Authorization': `Bearer ${authData.access_token}`
-      }
-    });
-
-    const tracksData = await tracksResponse.json();
-    
-    // Format the response
-    const tracks = tracksData.items.map((item: any) => ({
-      url: item.track.preview_url,
-      name: item.track.name,
-      imageUrl: item.track.album.images[0].url
-    }));
-
-    res.json(tracks);
-  } catch (error) {
-    console.error('Spotify API error:', error);
-    res.status(500).json({ error: 'Failed to fetch tracks' });
-  }
-});
