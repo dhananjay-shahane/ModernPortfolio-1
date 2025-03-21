@@ -1,7 +1,6 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Play, Pause, SkipBack, SkipForward, Music2 } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Music2, Waves } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -26,33 +25,52 @@ const MusicPlayer = () => {
     // Initialize Spotify and fetch tracks
     const fetchTracks = async () => {
       try {
-        const response = await fetch('/api/spotify/tracks');
+        const response = await fetch("/api/spotify/tracks");
         const data = await response.json();
         setTracks(data);
       } catch (error) {
-        console.error('Failed to fetch tracks:', error);
+        console.error("Failed to fetch tracks:", error);
         // Fallback to default tracks if API fails
         setTracks([
           {
             url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
             name: "SoundHelix Song 1",
-            imageUrl: "https://picsum.photos/200/200"
+            imageUrl: "https://picsum.photos/200/200",
           },
           {
             url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
             name: "SoundHelix Song 2",
-            imageUrl: "https://picsum.photos/200/200"
+            imageUrl: "https://picsum.photos/200/200",
           },
           {
             url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
             name: "SoundHelix Song 3",
-            imageUrl: "https://picsum.photos/200/200"
-          }
+            imageUrl: "https://picsum.photos/200/200",
+          },
         ]);
       }
     };
 
     fetchTracks();
+  }, []);
+
+  useEffect(() => {
+    // Update play state if audio ends
+    if (audioRef.current) {
+      const handleEnded = () => playNext();
+      const handlePlay = () => setIsPlaying(true);
+      const handlePause = () => setIsPlaying(false);
+
+      audioRef.current.addEventListener("ended", handleEnded);
+      audioRef.current.addEventListener("play", handlePlay);
+      audioRef.current.addEventListener("pause", handlePause);
+
+      return () => {
+        audioRef.current?.removeEventListener("ended", handleEnded);
+        audioRef.current?.removeEventListener("play", handlePlay);
+        audioRef.current?.removeEventListener("pause", handlePause);
+      };
+    }
   }, []);
 
   const togglePlay = () => {
@@ -62,22 +80,15 @@ const MusicPlayer = () => {
       } else {
         audioRef.current.play();
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
   const playNext = () => {
     setCurrentSongIndex((prev) => (prev + 1) % tracks.length);
-    if (isPlaying && audioRef.current) {
-      audioRef.current.play();
-    }
   };
 
   const playPrevious = () => {
     setCurrentSongIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
-    if (isPlaying && audioRef.current) {
-      audioRef.current.play();
-    }
   };
 
   const currentTrack = tracks[currentSongIndex];
@@ -90,7 +101,7 @@ const MusicPlayer = () => {
           size="icon"
           className="fixed right-4 top-20 z-50 h-10 w-10 rounded-full bg-background/80 shadow-lg backdrop-blur-lg"
         >
-          <Music2 className="h-5 w-5" />
+          {isPlaying ? <Waves className="h-5 w-5 text-green-500 animate-pulse" /> : <Music2 className="h-5 w-5" />}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -100,42 +111,24 @@ const MusicPlayer = () => {
         <div className="flex flex-col items-center gap-4 py-6">
           {currentTrack && (
             <>
-              <img 
-                src={currentTrack.imageUrl} 
+              <img
+                src={currentTrack.imageUrl}
                 alt={currentTrack.name}
                 className="w-48 h-48 rounded-lg shadow-lg mb-4"
               />
               <h3 className="text-lg font-medium">{currentTrack.name}</h3>
             </>
           )}
-          <audio
-            ref={audioRef}
-            src={currentTrack?.url}
-            onEnded={playNext}
-          />
+          <audio ref={audioRef} src={currentTrack?.url} />
+
           <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={playPrevious}
-              className="rounded-full h-12 w-12"
-            >
+            <Button variant="ghost" size="icon" onClick={playPrevious} className="rounded-full h-12 w-12">
               <SkipBack className="h-6 w-6" />
             </Button>
-            <Button
-              variant="default"
-              size="icon"
-              onClick={togglePlay}
-              className="rounded-full h-16 w-16"
-            >
+            <Button variant="default" size="icon" onClick={togglePlay} className="rounded-full h-16 w-16">
               {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8" />}
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={playNext}
-              className="rounded-full h-12 w-12"
-            >
+            <Button variant="ghost" size="icon" onClick={playNext} className="rounded-full h-12 w-12">
               <SkipForward className="h-6 w-6" />
             </Button>
           </div>

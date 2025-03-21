@@ -28,8 +28,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           {children}
         </motion.main>
       </AnimatePresence>
-
-      <MusicPlayer />
       <Footer />
     </div>
   );

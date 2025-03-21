@@ -13,20 +13,51 @@
     image-rendering: pixelated;
   }
 
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
   body {
-    font-family: 'VT323', monospace !important;
-    image-rendering: pixelated;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAIUlEQVQoU2P8////fwYkwMjIyIjMZmLADUYVjHgFIHUAAKuXJHy1mzeUAAAAAElFTkSuQmCC");
-    background-repeat: repeat;
+      font-family: 'VT323', monospace !important;
+      image-rendering: pixelated;
+      /* background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAPklEQVR42mNgGAUjFxcXExMT8//+fxsYGNjU1JQZGhsbo6OjgYGBYSFhhDQwMDDw4ePFJvYgEAMTseKP9Rs0AAAAAElFTkSuQmCC"); */
+      background-repeat: repeat;
+      margin: 0;
+      overflow: hidden;
+  }
+  
+  /* Optional: Cool Glitch Effect */
+  @keyframes glitch {
+      0% { text-shadow: 2px 2px #ff0000, -2px -2px #00ffcc; }
+      25% { text-shadow: -2px -2px #ff0000, 2px 2px #00ffcc; }
+      50% { text-shadow: 2px -2px #ff0000, -2px 2px #00ffcc; }
+      75% { text-shadow: -2px 2px #ff0000, 2px -2px #00ffcc; }
+      100% { text-shadow: 2px 2px #ff0000, -2px -2px #00ffcc; }
   }
 
-  button {
-    @apply border-2 border-black hover:border-primary transition-colors !important;
-    image-rendering: pixelated;
-    box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
-  }
 
-  h1, h2, h3, h4, h5, h6 {
+  @import url('https://www.fontspace.com/get/font/29489/pixel-operator');
+
+    .pixel-text {
+      font-family: 'Pixel Operator', sans-serif;
+      font-size: 3rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow: 
+        5px 5px 0px black, 
+        -5px -5px 0px black, 
+        5px -5px 0px black, 
+        -5px 5px 0px black;
+    }
+
+
+  
+  h1 {
+      font-size: 32px;
+      animation: glitch 0.5s infinite alternate;
+  }
+  
+  h1, h2, h5, h6 {
     text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
   }
   

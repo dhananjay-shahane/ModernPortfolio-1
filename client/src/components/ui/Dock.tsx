@@ -18,9 +18,9 @@ export function Dock() {
 
   const links = [
     { path: "/", icon: Home, label: "Home" },
+    { path: "/about", icon: User, label: "About" },
     { path: "/projects", icon: FolderKanban, label: "Projects" },
     { path: "/contact", icon: Mail, label: "Contact" },
-    { path: "/about", icon: User, label: "About" },
   ];
 
   return (
@@ -33,7 +33,7 @@ export function Dock() {
               size="icon"
               className={cn(
                 "rounded-full transition-all",
-                location === path && "bg-accent text-accent-foreground"
+                location === path && "bg-primary shadow-[3px_3px_0_rgba(0,0,0,0.8)] text-white"
               )}
             >
               <Icon className="h-5 w-5" />
